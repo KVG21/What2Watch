@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/core'
 import React from 'react'
-import { Button, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { auth } from '../firebase'
 
 const HomeScreen = () => {
@@ -24,12 +24,6 @@ const HomeScreen = () => {
         style={styles.button}
       >
         <Text style={styles.buttonText}>Sign out</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={toMaps}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Go to Maps</Text>
       </TouchableOpacity>
     </View>
   )

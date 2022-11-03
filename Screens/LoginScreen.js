@@ -2,11 +2,11 @@ import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { auth } from '../firebase'
+import SingupScreen from './SingupScreen'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
   const navigation = useNavigation()
 
   useEffect(() => {
@@ -19,16 +19,6 @@ const LoginScreen = () => {
     return unsubscribe
   }, [])
 
-  const handleSignUp = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(userCredentials => {
-        const user = userCredentials.user;
-        console.log('Registered with:', user.email);
-      })
-      .catch(error => alert(error.message))
-  }
-
   const handleLogin = () => {
     auth
       .signInWithEmailAndPassword(email, password)
@@ -37,6 +27,10 @@ const LoginScreen = () => {
         console.log('Logged in with:', user.email);
       })
       .catch(error => alert(error.message))
+  }
+
+  const notUser = () => {
+    navigation.navigate("Signup")
   }
 
   return (
@@ -63,15 +57,13 @@ const LoginScreen = () => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={handleLogin}
-          style={styles.button}
-        >
+          style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+          onPress={notUser}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Not a user? Signup</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
