@@ -28,6 +28,10 @@ const LoginScreen = () => {
       })
       .catch(error => alert(error.message))
   }
+  const anonymosLogin = () =>   {
+
+    navigation.replace("Home")
+  }
 
   const notUser = () => {
     navigation.navigate("Signup")
@@ -64,6 +68,11 @@ const LoginScreen = () => {
           onPress={notUser}
           style={styles.button}>
           <Text style={styles.buttonText}>Not a user? Signup</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={anonymosLogin}
+          style={styles.button}>
+          <Text style={styles.buttonText}>anonymos Login</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
