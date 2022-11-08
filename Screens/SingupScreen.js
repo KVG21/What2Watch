@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { auth } from '../firebase'
+import { getAuth,onAuthStateChanged,createUserWithEmailAndPassword } from '../firebase'
 import LoginScreen from './LoginScreen'
 
 
@@ -12,7 +12,8 @@ const [password, setPassword] = useState('')
 const navigation = useNavigation()
 
 useEffect(() => {
-  const unsubscribe = auth.onAuthStateChanged(user => {
+  const auth = getAuth()
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
     if (user) {
       navigation.replace("Home")
     }
@@ -22,8 +23,8 @@ useEffect(() => {
 }, [])
 
 const handleSignUp = () => {
-    auth
-      .createUserWithEmailAndPassword(email, password)
+    const auth = getAuth()
+      createUserWithEmailAndPassword(auth,email, password)
       .then(userCredentials => {
         const user = userCredentials.user;
         console.log('Registered with:', user.email);
