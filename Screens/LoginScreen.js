@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { auth } from '../firebase'
 import SingupScreen from './SingupScreen'
+import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
+import IconTextbox from '../materialComponents/IconTextbox'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -38,44 +40,43 @@ const LoginScreen = () => {
   }
 
   return (
-    <KeyboardAvoidingView
+    <View
       style={styles.container}
       behavior="padding"
     >
-      <View style={styles.inputContainer}>
-        <TextInput
+        <UnderlineTextbox
           placeholder="Email"
           value={email}
           onChangeText={text => setEmail(text)}
-          style={styles.input}
+          style={styles.underlineTextbox}
         />
-        <TextInput
+        <IconTextbox
           placeholder="Password"
           value={password}
           onChangeText={text => setPassword(text)}
-          style={styles.input}
-          secureTextEntry
+          style={styles.iconTextbox}
+          secureTextEntry={true}
         />
-      </View>
 
-      <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={handleLogin}
           style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           onPress={notUser}
-          style={styles.button}>
-          <Text style={styles.buttonText}>Not a user? Signup</Text>
+          style={styles.buttonOutline}>
+          <Text style={styles.buttonOutlineText}>Not a user? Signup</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           onPress={anonymosLogin}
           style={styles.button}>
-          <Text style={styles.buttonText}>anonymos Login</Text>
+          <Text style={styles.buttonText}>Anonymous Login</Text>
         </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+
+    </View>
   )
 }
 
@@ -86,44 +87,42 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: "rgba(20,20,20,1)"
   },
-  inputContainer: {
-    width: '80%'
+  underlineTextbox: {
+    height: 45,
+    width: 300,
   },
-  input: {
-    backgroundColor: 'white',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
-  },
-  buttonContainer: {
-    width: '60%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 40,
+  iconTextbox: {
+    marginTop:22,
+    height:45,
+    width:300,
   },
   button: {
-    backgroundColor: '#0782F9',
-    width: '100%',
-    padding: 15,
+    width: 150,
+    height: 59,
+    backgroundColor: "rgba(94,53,177,1)",
     borderRadius: 10,
     alignItems: 'center',
-  },
-  buttonOutline: {
-    backgroundColor: 'white',
-    marginTop: 5,
-    borderColor: '#0782F9',
-    borderWidth: 2,
+    justifyContent: 'center',
+    marginTop:22,
   },
   buttonText: {
-    color: 'white',
-    fontWeight: '700',
+    color: "white",
     fontSize: 16,
   },
+  buttonOutline: {
+    width: 150,
+    height: 59,
+    backgroundColor: "rgba(20,20,20,1)",
+    borderWidth: 2,
+    borderColor: "rgba(94,53,177,1)",
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 22,
+  },
   buttonOutlineText: {
-    color: '#0782F9',
-    fontWeight: '700',
-    fontSize: 16,
+    color: "white",
   },
 })
