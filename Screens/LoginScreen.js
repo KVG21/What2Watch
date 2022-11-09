@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import { auth } from '../firebase'
+import { getAuth,onAuthStateChanged,signInWithEmailAndPassword } from '../firebase'
 import SingupScreen from './SingupScreen'
 
 const LoginScreen = () => {
@@ -10,7 +10,8 @@ const LoginScreen = () => {
   const navigation = useNavigation()
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    const auth = getAuth()
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         navigation.replace("Home")
       }
@@ -20,16 +21,17 @@ const LoginScreen = () => {
   }, [])
 
   const handleLogin = () => {
-    auth
-      .signInWithEmailAndPassword(email, password)
+    const auth = getAuth()
+      signInWithEmailAndPassword(auth,email, password)
       .then(userCredentials => {
         const user = userCredentials.user;
         console.log('Logged in with:', user.email);
       })
       .catch(error => alert(error.message))
   }
-  const anonymosLogin = () =>   {
 
+
+  const anonymosLogin = () =>   {
     navigation.replace("Home")
   }
 
