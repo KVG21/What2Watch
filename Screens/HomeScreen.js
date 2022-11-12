@@ -1,9 +1,15 @@
+import { async } from '@firebase/util'
 import { useNavigation } from '@react-navigation/core'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { getAuth, signOut } from '../firebase'
+import { getAuth, signOut, firebase } from '../firebase'
 
 const HomeScreen = () => {
+
+  //const movieFetch = firebase.firestore().collection('movies');
+
+
+  //navigation
   const navigation = useNavigation()
   const handleSignOut = () => {
     const auth = getAuth()
@@ -14,10 +20,30 @@ const HomeScreen = () => {
       .catch(error => alert(error.message))
   }
 
+  //map the data
+  /*useEffect(async () => {
+    movieFetch
+    .onSnapshot(
+      querySnapshot => {
+       querySnapshot.forEach((doc) => {
+        const { photo, description, rating, title } = doc.data()
+        .push({
+          id: doc.id,
+          photo,
+          description,
+          rating,
+          title,
+        })
+       }) 
+      }
+    )
+  })*/
+
+
 
   return (
     <View style={styles.container}>
-      <Text>Email: {getAuth().currentUser?.email}</Text>
+      
       <TouchableOpacity
         onPress={handleSignOut}
         style={styles.button}
