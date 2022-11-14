@@ -1,13 +1,41 @@
 import { async } from '@firebase/util'
 import { useNavigation } from '@react-navigation/core'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { getAuth, signOut, firebase } from '../firebase'
+import { getAuth, signOut, firestore, MOVIES, SERIES, onSnapshot,query,collection } from '../firebase'
 
 const HomeScreen = () => {
 
-  //const movieFetch = firebase.firestore().collection('movies');
+  const [movies, setMovies] = useState([]) // array for movies
+ 
+  useEffect(() => {
+    const q = query(collection(firestore,MOVIES)) // query with route to movies in database
 
+    const queryAllMovies = onSnapshot(q,(querySnapshot) => { //function to query all movies
+      const tempArray = []
+
+      querySnapshot.forEach((doc) => { // create objects of data
+        const moviesObject = {
+          id: doc.id,
+          Photo: doc.data().Photo,
+          Description : doc.data().description,
+          Director: doc.data().Director,
+          Genre : doc.data().Genre,
+          PgR : doc.data().pgR,
+          Rating : doc.data().rating,
+          Stars : doc.data().stars,
+          Time : doc.data().time,
+          Title : doc.data().title,
+          Trailer : doc.data().trailer
+        }
+        tempArray.push(moviesObject) // push object into temporary array
+      })
+      setMovies(tempArray) // push temporary array into movies array
+    })
+    return () => {
+      queryAllMovies() // run queryAllMovies function
+    }
+  }, [])
 
   //navigation
   const navigation = useNavigation()
@@ -20,26 +48,9 @@ const HomeScreen = () => {
       .catch(error => alert(error.message))
   }
 
-  //map the data
-  /*useEffect(async () => {
-    movieFetch
-    .onSnapshot(
-      querySnapshot => {
-       querySnapshot.forEach((doc) => {
-        const { photo, description, rating, title } = doc.data()
-        .push({
-          id: doc.id,
-          photo,
-          description,
-          rating,
-          title,
-        })
-       }) 
-      }
-    )
-  })*/
+ 
 
-
+  console.log(movies)
 
   return (
     <View style={styles.container}>
