@@ -1,7 +1,7 @@
 import { async } from '@firebase/util'
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getAuth, signOut, firestore, MOVIES, SERIES, onSnapshot,query,collection } from '../firebase'
 
@@ -84,15 +84,15 @@ const HomeScreen = () => {
         {
           movies.map((movie) => (
           <View>
-          <Text>movie
-          {movie.Title}</Text>  
+          <Image source={{ uri: movie.Photo}} style={{ width: 150, height: 150}}></Image>  
           </View>
           ))
         }  
+        
         {
           series.map((serie) => (
           <View>
-          <Text>series{serie.Title}</Text>  
+          <Image source={{ uri: serie.Photo}} style={{ width: 150, height: 150}}></Image>
           </View>
           ))
         }  
