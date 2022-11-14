@@ -85,21 +85,19 @@ const HomeScreen = () => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         {
-          movies.map((movie) => { return(  
-            <View key={movie.id} style={styles.imgContainer}>
-            <Image source={{ uri: movie.Photo}} style={styles.image} resizeMode='contain'></Image>  
-            </View>
-            )
-})
+          movies.map((movie) => (
+          <View>
+          <Image source={{ uri: movie.Photo}} style={{ width: 150, height: 150}}></Image>  
+          </View>
+          ))
         }  
         
         {
-          series.map((serie) => { return(
-          <View key={serie.id} style={styles.imgContainer}>
-          <Image source={{ uri: serie.Photo}} style={styles.image}></Image>
+          series.map((serie) => (
+          <View>
+          <Image source={{ uri: serie.Photo}} style={{ width: 150, height: 150}}></Image>
           </View>
-          )
-})
+          ))
         }  
         </ScrollView>    
       <TouchableOpacity
