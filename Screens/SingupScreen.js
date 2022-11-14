@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { auth } from '../firebase'
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
 import IconTextbox from '../materialComponents/IconTextbox'
 import LoginScreen from './LoginScreen'
+import styles from '../styles/signup'
 
 
 const SingupScreen = () => {
@@ -73,49 +74,3 @@ const handleSignUp = () => {
 }
 
 export default SingupScreen
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: "rgba(20,20,20,1)"
-  },
-  underlineTextbox: {
-    height: 45,
-    width: 300,
-  },
-  iconTextbox: {
-    marginTop:22,
-    height:45,
-    width:300,
-  },
-  button: {
-    width: 150,
-    height: 59,
-    backgroundColor: "rgba(94,53,177,1)",
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop:22,
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-  },
-  buttonOutline: {
-    width: 150,
-    height: 59,
-    backgroundColor: "rgba(20,20,20,1)",
-    borderWidth: 2,
-    borderColor: "rgba(94,53,177,1)",
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 22,
-  },
-  buttonOutlineText: {
-    color: "white",
-  },
-
-})
