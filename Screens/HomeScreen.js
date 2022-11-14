@@ -1,9 +1,12 @@
 import { async } from '@firebase/util'
 import { useNavigation } from '@react-navigation/core'
+
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getAuth, signOut, firestore, MOVIES, SERIES, onSnapshot,query,collection } from '../firebase'
+import styles from '../styles/homescreen'
+
 
 const HomeScreen = () => {
 
@@ -108,24 +111,3 @@ const HomeScreen = () => {
 }
 
 export default HomeScreen
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-   button: {
-    backgroundColor: '#0782F9',
-    width: '60%',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginTop: 40,
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: '700',
-    fontSize: 16,
-  },
-})
