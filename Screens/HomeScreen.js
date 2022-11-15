@@ -95,7 +95,7 @@ const HomeScreen = () => {
       )}
       /> 
 
-      <FlatList
+     {/* <FlatList
       keyExtractor={(item) => item.id}
       data={series}
       renderItem={({item}) => ( 
@@ -105,7 +105,7 @@ const HomeScreen = () => {
       resizeMode='contain'></Image>
       </>
       )}
-      /> 
+      /> */}
       
       <TouchableOpacity
         onPress={handleSignOut}
