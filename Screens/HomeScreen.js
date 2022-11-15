@@ -2,7 +2,7 @@ import { async } from '@firebase/util'
 import { useNavigation } from '@react-navigation/core'
 
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, ScrollView, Image } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, FlatList, Image } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getAuth, signOut, firestore, MOVIES, SERIES, onSnapshot,query,collection } from '../firebase'
 import styles from '../styles/homescreen'
@@ -83,26 +83,30 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        {
-          movies.map((movie) => { return(  
-            <View key={movie.id} style={styles.imgContainer}>
-            <Image source={{ uri: movie.Photo}} style={styles.image} resizeMode='contain'></Image>  
-            </View>
-            )
-})}
-        
-        {
-          series.map((serie) => { return(
-            <View key={serie.id} style={styles.imgContainer}>
-            <Image source={{ uri: serie.Photo}} style={{ width: 150, height: 150}}></Image>
-            </View>
-            )
-          })
-          }  
-        
+      <FlatList
+      keyExtractor={(item) => item.id}
+      data={movies}
+      renderItem={({ item }) => ( 
+      <>
+      <Image source={{ uri: item.Photo }}
+      style={styles.image}
+      resizeMode='contain'></Image>
+      </>
+      )}
+      /> 
 
-        </ScrollView>    
+      <FlatList
+      keyExtractor={(item) => item.id}
+      data={series}
+      renderItem={({item}) => ( 
+      <>
+      <Image source={{ uri: item.Photo }}
+      style={styles.image}
+      resizeMode='contain'></Image>
+      </>
+      )}
+      /> 
+      
       <TouchableOpacity
         onPress={handleSignOut}
         style={styles.button}
