@@ -4,7 +4,8 @@ export default StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      backgroundColor: 'rgba(20,20,20,1)'
     },
      button: {
       backgroundColor: '#0782F9',
@@ -19,10 +20,9 @@ export default StyleSheet.create({
       fontWeight: '700',
       fontSize: 16,
     },
-<<<<<<< Updated upstream
-=======
     imgContainer: {
-      border: '1px solid black',
+      width:157,
+      height:203,
     },
     image:{
       width:157,
@@ -31,5 +31,5 @@ export default StyleSheet.create({
       marginLeft:5,
       marginRight:5,
     },
->>>>>>> Stashed changes
+
   })
