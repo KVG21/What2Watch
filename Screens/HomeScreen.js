@@ -15,6 +15,23 @@ const HomeScreen = () => {
       .catch(error => alert(error.message))
   }
 
+<<<<<<< Updated upstream
+=======
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+      keyExtractor={(item) => item.id}
+      data={movies}
+      numColumns={2}
+      renderItem={({ item }) => ( 
+      <>
+      <Image source={{ uri: item.Photo }}
+      style={styles.image}
+      resizeMode='contain'></Image>
+      </>
+      )}
+      /> 
+>>>>>>> Stashed changes
 
   return (
     <View style={styles.container}>

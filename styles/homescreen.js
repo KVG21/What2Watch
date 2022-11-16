@@ -19,4 +19,17 @@ export default StyleSheet.create({
       fontWeight: '700',
       fontSize: 16,
     },
+<<<<<<< Updated upstream
+=======
+    imgContainer: {
+      border: '1px solid black',
+    },
+    image:{
+      width:157,
+      height:203,
+      marginBottom:20,
+      marginLeft:5,
+      marginRight:5,
+    },
+>>>>>>> Stashed changes
   })
