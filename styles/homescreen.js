@@ -21,10 +21,15 @@ export default StyleSheet.create({
       fontSize: 16,
     },
     imgContainer: {
-      border: '1px solid black',
+      width:157,
+      height:203,
     },
     image:{
       width:157,
       height:203,
+      marginBottom:20,
+      marginLeft:5,
+      marginRight:5,
     },
+
   })

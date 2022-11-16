@@ -86,6 +86,7 @@ const HomeScreen = () => {
       <FlatList
       keyExtractor={(item) => item.id}
       data={movies}
+      numColumns={2]
       renderItem={({ item }) => ( 
       <>
       <Image source={{ uri: item.Photo }}
