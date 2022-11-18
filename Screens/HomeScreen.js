@@ -6,10 +6,12 @@ import { StyleSheet, Text, TouchableOpacity, View, FlatList, Image } from 'react
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { getAuth, signOut, firestore, MOVIES, SERIES, onSnapshot,query,collection } from '../firebase'
 import styles from '../styles/homescreen'
+import MovieDescriptionScreen from './MovieDescriptionScreen'
 
 
 const HomeScreen = () => {
 
+  const navigation = useNavigation()
   const [movies, setMovies] = useState([]) // array for movies and series
   const [series, setSeries] = useState([])
  
@@ -22,8 +24,8 @@ const HomeScreen = () => {
           id: doc.id,
           Photo: doc.data().Photo,
           Description : doc.data().description,
-          Director: doc.data().Director,
-          Genre : doc.data().Genre,
+          Director: doc.data().director,
+          Genre : doc.data().genre,
           PgR : doc.data().pgR,
           Rating : doc.data().rating,
           Stars : doc.data().stars,
@@ -51,7 +53,7 @@ const HomeScreen = () => {
           Photo: doc.data().Photo,
           Description : doc.data().description,
           Episodes: doc.data().episodes,
-          Genre : doc.data().Genre,
+          Genre : doc.data().genre,
           PgR : doc.data().pgR,
           Rating : doc.data().rating,
           Stars : doc.data().stars,
@@ -68,10 +70,14 @@ const HomeScreen = () => {
     }
   }, [])
 
-
+  const handleImageClick = (item) => {
+    let tempArray = [item]
+    navigation.navigate('MdesScreen', {
+      item : tempArray
+    } )
+  }
 
   //navigation
-  const navigation = useNavigation()
   const handleSignOut = () => {
     const auth = getAuth()
       signOut(auth)
@@ -88,9 +94,11 @@ const HomeScreen = () => {
       data={movies}
       renderItem={({ item }) => ( 
       <>
-      <Image source={{ uri: item.Photo }}
-      style={styles.image}
-      resizeMode='contain'></Image>
+      <TouchableOpacity onPress = { () => handleImageClick(item) }>
+        <Image source={{ uri: item.Photo }}
+        style={styles.image}
+        resizeMode='contain'></Image>
+      </TouchableOpacity>
       </>
       )}
       /> 
