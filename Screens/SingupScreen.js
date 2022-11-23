@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View } from 'react-native'
 import { getAuth,onAuthStateChanged,createUserWithEmailAndPassword } from '../firebase'
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
 import IconTextbox from '../materialComponents/IconTextbox'
+import LoginScreen from './LoginScreen'
 import styles from '../styles/signup'
 
 
@@ -13,25 +14,15 @@ const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
 const navigation = useNavigation()
 
-useEffect(() => {
-  const auth = getAuth()
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    if (user) {
-      navigation.replace("Home")
-    }
-  })
-
-  return unsubscribe
-}, [])
-
 const handleSignUp = () => {
   console.log(email, password)
     const auth = getAuth()
       createUserWithEmailAndPassword(auth,email, password)
-      .then(userCredentials => {
-        const user = userCredentials.user;
-        console.log('Registered with:', user.email);
-      })
+      .then( () => onAuthStateChanged(auth, (user) => {
+        if (user) {
+          navigation.replace("Home")
+        }
+      }))
       .catch(error => alert(error.message))
   }
 

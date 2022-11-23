@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { getAuth,onAuthStateChanged,signInWithEmailAndPassword } from '../firebase'
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
@@ -11,15 +11,20 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('')
   const navigation = useNavigation()
 
+ 
   const handleLogin = () => {
     const auth = getAuth()
       signInWithEmailAndPassword(auth,email, password)
-      .then(userCredentials => {
-        const user = userCredentials.user;
-        console.log('Logged in with:', user.email);
+      .then( () => {
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            navigation.replace("Home")
+          }
+        })
       })
       .catch(error => alert(error.message))
   }
+
 
   const anonymosLogin = () =>   {
     navigation.replace("Home")
@@ -63,6 +68,7 @@ const LoginScreen = () => {
           style={styles.button}>
           <Text style={styles.buttonText}>Anonymous Login</Text>
         </TouchableOpacity>
+
     </View>
   )
 }
