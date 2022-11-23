@@ -7,8 +7,12 @@ import styles from '../styles/homescreen'
 import IconButtonsFooter from '../materialComponents/IconButtonFooter'
 import MovieScreen from './SubScreens/MovieScreen'
 import SeriesScreen from './SubScreens/SeriesScreen'
+<<<<<<< Updated upstream
 import AccountScreen from './SubScreens/AccountScreen'
 
+=======
+import AccountSettingsScreen from './SubScreens/AccountSettingsScreen'
+>>>>>>> Stashed changes
 
 export default function HomeScreen() {
 
@@ -24,7 +28,11 @@ export default function HomeScreen() {
     } else if(screen === 3) {
       return (<></>)
     } else if(screen === 4) { 
+<<<<<<< Updated upstream
       return (<AccountScreen/>)
+=======
+      return (<AccountSettingsScreen/>)
+>>>>>>> Stashed changes
     } else if(screen === 5) {
       handleSignOut()
     }  
@@ -39,6 +47,8 @@ export default function HomeScreen() {
       })
       .catch(error => alert(error.message))
   }
+
+
 
   return (
     <SafeAreaView style={styles.container}>   
