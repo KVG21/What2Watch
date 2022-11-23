@@ -11,7 +11,6 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('')
   const navigation = useNavigation()
 
- 
   const handleLogin = () => {
     const auth = getAuth()
       signInWithEmailAndPassword(auth,email, password)
@@ -24,7 +23,6 @@ const LoginScreen = () => {
       })
       .catch(error => alert(error.message))
   }
-
 
   const anonymosLogin = () =>   {
     navigation.replace("Home")
