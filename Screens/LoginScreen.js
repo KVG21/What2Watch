@@ -12,6 +12,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('')
   const navigation = useNavigation()
 
+<<<<<<< Updated upstream
   useEffect(() => {
     const auth = getAuth()
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -23,6 +24,8 @@ const LoginScreen = () => {
     return unsubscribe
   }, [])
 
+=======
+>>>>>>> Stashed changes
   const handleLogin = () => {
     const auth = getAuth()
       signInWithEmailAndPassword(auth,email, password)
@@ -32,7 +35,6 @@ const LoginScreen = () => {
       })
       .catch(error => alert(error.message))
   }
-
 
   const anonymosLogin = () =>   {
     navigation.replace("Home")
