@@ -5,6 +5,7 @@ import { getAuth,onAuthStateChanged,signInWithEmailAndPassword } from '../fireba
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
 import IconTextbox from '../materialComponents/IconTextbox'
 import styles from '../styles/login'
+import accountScreen from './SubScreens/accountScreen'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -41,6 +42,10 @@ const LoginScreen = () => {
     navigation.navigate("Signup")
   }
 
+  const forgotPassword = () => {
+    navigation.navigate("accountScreen")
+  }
+
   return (
     <View
       style={styles.container}
@@ -74,6 +79,12 @@ const LoginScreen = () => {
           onPress={anonymosLogin}
           style={styles.button}>
           <Text style={styles.buttonText}>Anonymous Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={forgotPassword}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Forgot password? Change password</Text>
         </TouchableOpacity>
 
     </View>
