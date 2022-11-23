@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { getAuth,onAuthStateChanged,signInWithEmailAndPassword } from '../firebase'
-import SingupScreen from './SingupScreen'
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
 import IconTextbox from '../materialComponents/IconTextbox'
 import styles from '../styles/login'
@@ -47,19 +46,17 @@ const LoginScreen = () => {
       style={styles.container}
       behavior="padding"
     >
-        <UnderlineTextbox
-          placeholder="Email"
-          value={email}
-          onChangeText={text => setEmail(text)}
-          style={styles.underlineTextbox}
-        />
-        <IconTextbox
-          placeholder="Password"
-          value={password}
-          onChangeText={text => setPassword(text)}
-          style={styles.iconTextbox}
-          secureTextEntry={true}
-        />
+      <UnderlineTextbox
+        setEmail = { setEmail }
+        email = { email }
+        style={styles.underlineTextbox}
+      />
+
+      <IconTextbox      
+        setPassword = { setPassword }
+        password = {password}
+        style={styles.iconTextbox}
+      />
 
         <TouchableOpacity
           onPress={handleLogin}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Pressable } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-function IconTextbox(props) {
+function IconTextbox({style, setPassword, password}) {
     const [passwordVisibility, setPasswordVisibility] = useState(true);
     const [rightIcon, setRightIcon] = useState('eye');
 
@@ -18,8 +18,8 @@ function IconTextbox(props) {
     }
 
   return (
-    <View style={[styles.container, props.style]}>
-      <TextInput placeholder="password" placeholderTextColor="grey" style={styles.inputStyle} secureTextEntry={passwordVisibility}></TextInput>
+    <View style={[styles.container, style]}>
+      <TextInput placeholder="password" value = {password} placeholderTextColor="grey" style={styles.inputStyle} secureTextEntry={passwordVisibility} onChangeText={text => setPassword(text)}></TextInput>
       <Pressable onPress={handlePasswordVisibility}>
         <MaterialCommunityIcons name={rightIcon} size={24} color="#616161" />
       </Pressable>

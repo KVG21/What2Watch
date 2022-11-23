@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TextInput } from "react-native";
 
-function UnderlineTextbox(props) {
+function UnderlineTextbox({style, email, setEmail}) {
   return (
-    <View style={[styles.container, props.style]}>
+    <View style={[styles.container, style]}>
       <TextInput
         placeholder="email"
         placeholderTextColor="grey"
+        value = {email}
+        onChangeText={text => setEmail(text)}
         style={styles.inputStyle}
       ></TextInput>
     </View>

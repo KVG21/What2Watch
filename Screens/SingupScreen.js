@@ -26,6 +26,7 @@ useEffect(() => {
 }, [])
 
 const handleSignUp = () => {
+  console.log(email, password)
     const auth = getAuth()
       createUserWithEmailAndPassword(auth,email, password)
       .then(userCredentials => {
@@ -45,18 +46,15 @@ const handleSignUp = () => {
     behavior="padding"
   >
       <UnderlineTextbox
-        placeholder="Email"
-        value={email}
-        onChangeText={text => setEmail(text)}
+        setEmail = { setEmail }
+        email = { email }
         style={styles.underlineTextbox}
       />
 
-      <IconTextbox
-        placeholder="Password"
-        value={password}
-        onChangeText={text => setPassword(text)}
+      <IconTextbox      
+        setPassword = { setPassword }
+        password = {password}
         style={styles.iconTextbox}
-        secureTextEntry
       />
 
       <TouchableOpacity
