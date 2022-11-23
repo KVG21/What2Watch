@@ -5,27 +5,12 @@ import { getAuth,onAuthStateChanged,signInWithEmailAndPassword } from '../fireba
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
 import IconTextbox from '../materialComponents/IconTextbox'
 import styles from '../styles/login'
-import accountScreen from './SubScreens/accountScreen'
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigation = useNavigation()
 
-<<<<<<< Updated upstream
-  useEffect(() => {
-    const auth = getAuth()
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        navigation.replace("Home")
-      }
-    })
-
-    return unsubscribe
-  }, [])
-
-=======
->>>>>>> Stashed changes
   const handleLogin = () => {
     const auth = getAuth()
       signInWithEmailAndPassword(auth,email, password)
@@ -42,10 +27,6 @@ const LoginScreen = () => {
 
   const notUser = () => {
     navigation.navigate("Signup")
-  }
-
-  const forgotPassword = () => {
-    navigation.navigate("accountScreen")
   }
 
   return (
@@ -82,13 +63,6 @@ const LoginScreen = () => {
           style={styles.button}>
           <Text style={styles.buttonText}>Anonymous Login</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={forgotPassword}
-          style={styles.button}>
-          <Text style={styles.buttonText}>Forgot password? Change password</Text>
-        </TouchableOpacity>
-
     </View>
   )
 }
