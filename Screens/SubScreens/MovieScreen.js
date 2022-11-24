@@ -1,9 +1,10 @@
-import { FlatList, Image, TouchableOpacity, Text} from 'react-native'
+import { FlatList, Image, TouchableOpacity, Text, View} from 'react-native'
 import {titleASC,titleDES,ratingASC,ratingDES,sortToGenres} from '../../utils/SortByFunctions'
 import {firestore, MOVIES, onSnapshot,query,collection } from '../../firebase'
 import { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/core'
 import styles from '../../styles/homescreen'
+import Icon from "react-native-vector-icons/Ionicons";
 
 export default function MovieScreen() {
 
@@ -79,24 +80,30 @@ export default function MovieScreen() {
   return (
    <>
 
+  <View style={styles.sortRectangle}>
     <TouchableOpacity onPress = { () => setToggleSortedByDd(!toggleSortedByDd)}>
-        <Text style = {styles.buttonText}>Sort by:</Text>
+        <View style={styles.wrapper}>
+          <Text style = {styles.sortTitle}>Sort by:</Text>
+          <Icon name='list-circle-outline' style = {styles.icon}></Icon>
+        </View>
           { toggleSortedByDd ? (
           <>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(1)}>A -{'>'} Z</Text>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(2)}>Z -{'>'} A</Text>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(3)}>Rating : High -{'>'} Low</Text>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(4)}>Rating : Low -{'>'} High</Text>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(5)}>Genres</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(1)}>A -{'>'} Z</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(2)}>Z -{'>'} A</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(3)}>Rating : High -{'>'} Low</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(4)}>Rating : Low -{'>'} High</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(5)}>Genres</Text>
           </>) 
           : 
           (
             <></>
           ) }
     </TouchableOpacity>
+  </View>
 
 
      <FlatList
+          style={styles.imagesContainer}
           keyExtractor={(item) => item.id}
           data={movies}
           numColumns={2}
