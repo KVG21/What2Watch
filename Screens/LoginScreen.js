@@ -66,7 +66,6 @@ const LoginScreen = () => {
           style={styles.button}>
           <Text style={styles.buttonText}>Anonymous Login</Text>
         </TouchableOpacity>
-
     </View>
   )
 }
