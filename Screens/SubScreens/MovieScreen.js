@@ -12,6 +12,13 @@ export default function MovieScreen() {
     const [movies, setMovies] = useState([]) // array for movies
     const navigation = useNavigation()
 
+    const toEmbed = (value) => {
+      const url = value
+      const eurl = url.split('watch?v=')
+      const embed = eurl.join('embed/')
+      return embed
+    }
+
     useEffect(() => {
         const q = query(collection(firestore,MOVIES)) // query with route to movies in database
         const queryAllMovies = onSnapshot(q,(querySnapshot) => { //function to query all movies
@@ -28,7 +35,7 @@ export default function MovieScreen() {
               Stars : doc.data().stars,
               Time : doc.data().time,
               Title : doc.data().title,
-              Trailer : doc.data().trailer
+              Trailer : toEmbed(doc.data().trailer)
             }
             tempArray.push(moviesObject) // push object into temporary array
           })

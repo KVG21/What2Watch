@@ -12,6 +12,13 @@ export default function SeriesScreen() {
     const [series, setSeries] = useState([]) // array for series
     const navigation = useNavigation()
 
+    const toEmbed = (value) => {
+      const url = value
+      const eurl = url.split('watch?v=')
+      const embed = eurl.join('embed/')
+      return embed
+    }
+
     useEffect(() => {
         const q = query(collection(firestore,SERIES)) // query with route to series in database
         const queryAllSeries = onSnapshot(q,(querySnapshot) => {
@@ -28,7 +35,7 @@ export default function SeriesScreen() {
               Stars : doc.data().stars,
               Time : doc.data().time,
               Title : doc.data().title,
-              Trailer : doc.data().trailer
+              Trailer : toEmbed(doc.data().trailer)
             }
             tempArray.push(seriesObject) // push object into temporary array
           })

@@ -1,11 +1,11 @@
 import { View, Text} from 'react-native'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
+import WebView from "react-native-webview"
 
 
 export default function MovieDescriptionScreen({route}) {
     const {item} = route.params;
-
   return (
     <>
     {item.map((item, key) => {
@@ -14,11 +14,16 @@ export default function MovieDescriptionScreen({route}) {
                 <Text style = {styles.title}>{item.Title}</Text>
 
                 <View style = { styles.timeCont}>
-                  <Icon name='time' style = {styles.icon}></Icon>
+                  <Icon name='time' style = {styles.timeIcon}></Icon>
                   <Text style = {styles.time}>{item.Time}</Text>
                 </View>
 
-                <Text style = {styles.descText}>Trailer : {item.Trailer}</Text>
+                <WebView 
+                allowsFullscreenVideo={true}
+                scrollEnabled={false}
+                bounces={false}
+                source={{uri: item.Trailer}}
+                style={styles.webview}/>
 
                 <View style = {styles.iconRow}>
                   <Icon name='eye' style = {styles.icon}></Icon>
@@ -33,7 +38,6 @@ export default function MovieDescriptionScreen({route}) {
                   <Icon name='heart' style = {styles.icon}></Icon>
                   <Text style = {styles.descText}>Add to list</Text>
                 </View>
-
 
                 <Text style = {styles.descDir}>Director : {item.Director}</Text>
                 <Text style = {styles.descStars}>Stars : {item.Stars}</Text>

@@ -3,17 +3,24 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgba(20,20,20,1)'
+        backgroundColor: '#333333'
     },
     title:{
         color:'white',
         fontSize:24,
-        marginTop: 80,
+        marginTop: 20,
+        marginLeft: 15,
     },
     icon:{
         color: "rgba(145,98,228,1)",
         fontSize: 21,
         marginTop: 4,
+    },
+    timeIcon: {
+        color: "rgba(145,98,228,1)",
+        fontSize: 21,
+        marginTop: 4,
+        marginLeft: 15,
     },
     time:{
         color:'white',
@@ -48,10 +55,10 @@ export default StyleSheet.create({
         marginLeft:10,
     },
     descBox:{
-        width:312,
+        width:350,
         backgroundColor: "rgba(37,37,37,1)",
         marginTop: 40,
-        marginLeft: 24,
+        marginHorizontal: 15,
         paddingBottom:50,
         paddingHorizontal:10,
     },
@@ -59,9 +66,14 @@ export default StyleSheet.create({
         color: 'white',
         marginTop:20,
         marginLeft:5,
+        fontSize:16,
     },
     episodesCont: {
         flexDirection:'row',
         alignItems: 'center',
+    },
+    webview: {
+        margin:15,
+        
     }
 })

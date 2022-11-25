@@ -1,6 +1,7 @@
 import {View, Text} from 'react-native'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
+import WebView from 'react-native-webview'
 
 export default function SeriesDescriptionScreen({route}) {
     const {item} = route.params;
@@ -12,16 +13,18 @@ export default function SeriesDescriptionScreen({route}) {
                 <Text style = {styles.title}>{item.Title}</Text>
 
                 <View style = { styles.timeCont}>
-                  <Icon name='time' style = {styles.icon}></Icon>
+                  <Icon name='time' style = {styles.timeIcon}></Icon>
                   <Text style = {styles.time}>{item.Time} mins</Text>
                 </View>
 
                 <View style = { styles.episodesCont}>
-                  <Icon name='easel' style = {styles.icon}></Icon>
+                  <Icon name='easel' style = {styles.timeIcon}></Icon>
                   <Text style = {styles.time}>{item.Episodes} episodes</Text>
                 </View>
 
-                <Text style = {styles.descText}>Trailer : {item.Trailer}</Text>
+                <WebView 
+                source={{uri: item.Trailer}}
+                style={styles.webview}/>
 
                 <View style = {styles.iconRow}>
                   <Icon name='eye' style = {styles.icon}></Icon>

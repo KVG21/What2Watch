@@ -5,7 +5,7 @@ export default StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: 'rgba(20,20,20,1)'
+      backgroundColor: '#333333'
     },
     buttonText: {
       color: 'white',
@@ -21,9 +21,9 @@ export default StyleSheet.create({
     },
     sortRectangle:{
       marginTop:20,
-      backgroundColor: "rgba(20,20,20,1)",
+      backgroundColor: "#333333",
       borderWidth: 1,
-      borderColor: "rgba(49,49,49,1)",
+      borderColor: "black",
       width:170,
     },
     imagesContainer: {

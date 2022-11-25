@@ -15,8 +15,25 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen options={{ headerShown: false }} name="Signup" component={Signup} />
         <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="MdesScreen" component={MovieDescriptionScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="SdesScreen" component={SeriesDescriptionScreen}/>
+
+        <Stack.Screen 
+        options={{title:'', 
+        headerTintColor:'rgba(145,98,228,1)',
+        headerStyle:{
+          backgroundColor:'#4f4f4f',
+          }
+          }}
+          name="MdesScreen" component={MovieDescriptionScreen} />
+
+        <Stack.Screen 
+        options={{ title:'',
+        headerTintColor:'rgba(145,98,228,1)',
+        headerStyle:{
+          backgroundColor:'#4f4f4f',
+          borderBottomWidth: 1,
+          }
+        }}
+        name="SdesScreen" component={SeriesDescriptionScreen}/>
         <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
