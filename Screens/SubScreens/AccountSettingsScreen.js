@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/homescreen'
 import UnderlineTextbox from '../../materialComponents/UnderlineTextbox'
-import {getAuth, sendPasswordResetEmail} from '../../firebase'
+import {getAuth, updatePassword, sendPasswordResetEmail, deleteUser} from '../../firebase'
 
 export default function AccountSettingsScreen() {
 
@@ -12,6 +12,7 @@ export default function AccountSettingsScreen() {
   const auth = getAuth()
   const uid = uid;
   let creationTime = auth.currentUser.metadata.creationTime
+  const user = auth.currentUser
 
   const updatePassword = () => {
     sendPasswordResetEmail(getAuth(), email)
@@ -19,9 +20,11 @@ export default function AccountSettingsScreen() {
       alert("Password reset email sent")
     }).catch(error => alert(error.message))
   }
-
+  //delete user toimii vain osalla tällä hetkellä
   const deleteUser = () => {
-      alert("Send your delete request to t0koma02@students.oamk.fi, include your email and registeration date")
+      deleteUser(user).then(() => {
+        navigation.replace("Signup")
+      }).catch(error => alert(error.message))
     }
 
   return (
@@ -37,14 +40,13 @@ export default function AccountSettingsScreen() {
         <UnderlineTextbox
         setEmail = { setEmail }
         email = { email }
-        style={styles.underlineTextbox}
-      />
+        style={styles.underlineTextbox}/>
         <TouchableOpacity
           onPress={updatePassword}
           style={styles.button}>
           <Text style={styles.buttonText}>Reset via email</Text>
         </TouchableOpacity>
-
+        
         <TouchableOpacity
           onPress={deleteUser}
           style={styles.button}>

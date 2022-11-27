@@ -7,6 +7,7 @@ import HomeScreen from './Screens/HomeScreen';
 import Signup from './Screens/SingupScreen';
 import SeriesDescriptionScreen from './Screens/SubScreens/SeriesDescriptionScreen';
 import AccountSettingsScreen from './Screens/SubScreens/AccountSettingsScreen';
+import ForgotPasswordScreen from './Screens/ForgotPasswordScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen options={{ headerShown: false }} name="Signup" component={Signup} />
         <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+        <Stack.Screen options={{ headerShown: false }} name="forgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen options={{ headerShown: false }} name="MdesScreen" component={MovieDescriptionScreen} />
         <Stack.Screen options={{ headerShown: false }} name="SdesScreen" component={SeriesDescriptionScreen}/>
         <Stack.Screen options={{ headerShown: false }} name="AccountSettings" component={AccountSettingsScreen}/>

@@ -32,6 +32,10 @@ const LoginScreen = () => {
     navigation.navigate("Signup")
   }
 
+  const forgotPassword = () => {
+    navigation.navigate("forgotPassword")
+  }
+
   return (
     <View
       style={styles.container}
@@ -65,6 +69,12 @@ const LoginScreen = () => {
           onPress={anonymosLogin}
           style={styles.button}>
           <Text style={styles.buttonText}>Anonymous Login</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={forgotPassword}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Forgot password? Reset via email</Text>
         </TouchableOpacity>
     </View>
   )
