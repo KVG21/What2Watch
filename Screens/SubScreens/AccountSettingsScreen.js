@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/homescreen'
 import UnderlineTextbox from '../../materialComponents/UnderlineTextbox'
-import {getAuth, updatePassword, sendPasswordResetEmail, deleteUser} from 'firebase/auth'
+import {getAuth, sendPasswordResetEmail, deleteUser} from 'firebase/auth'
 
 export default function AccountSettingsScreen() {
 
@@ -20,7 +20,7 @@ export default function AccountSettingsScreen() {
       alert("Password reset email sent")
     }).catch(error => alert(error.message))
   }
-  //delete user toimii vain osalla tällä hetkellä
+
   const handleDeleteUser = () => {
     const user = auth.currentUser
       deleteUser(user).then(() => {
@@ -34,7 +34,6 @@ export default function AccountSettingsScreen() {
       <TouchableOpacity
           style={styles.button}>
           <Text style={styles.buttonText}>{auth.currentUser?.email}</Text>
-          {/*<Text style={styles.buttonText}>{auth.currentUser?.uid}</Text>*/}
           <Text style={styles.buttonText}>Creation time: {creationTime}</Text>
         </TouchableOpacity>
 
