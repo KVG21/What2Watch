@@ -11,7 +11,7 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('')
   const navigation = useNavigation()
 
- 
+
   const handleLogin = () => {
     const auth = getAuth()
       signInWithEmailAndPassword(auth,email, password)
@@ -25,13 +25,16 @@ const LoginScreen = () => {
       .catch(error => alert(error.message))
   }
 
-
   const anonymosLogin = () =>   {
     navigation.replace("Home")
   }
 
   const notUser = () => {
     navigation.navigate("Signup")
+  }
+
+  const forgotPassword = () => {
+    navigation.navigate("forgotPassword")
   }
 
   return (
@@ -69,6 +72,11 @@ const LoginScreen = () => {
           <Text style={styles.buttonText}>Anonymous Login</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity
+          onPress={forgotPassword}
+          style={styles.button}>
+          <Text style={styles.buttonText}>Forgot password? Reset via email</Text>
+        </TouchableOpacity>
     </View>
   )
 }

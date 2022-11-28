@@ -7,7 +7,7 @@ import styles from '../styles/homescreen'
 import IconButtonsFooter from '../materialComponents/IconButtonFooter'
 import MovieScreen from './SubScreens/MovieScreen'
 import SeriesScreen from './SubScreens/SeriesScreen'
-
+import AccountSettingsScreen from './SubScreens/AccountSettingsScreen'
 
 export default function HomeScreen() {
 
@@ -23,7 +23,7 @@ export default function HomeScreen() {
     } else if(screen === 3) {
       return (<></>)
     } else if(screen === 4) { 
-      return (<></>)
+      return (<AccountSettingsScreen/>)
     } else if(screen === 5) {
       handleSignOut()
     }  
@@ -38,6 +38,8 @@ export default function HomeScreen() {
       })
       .catch(error => alert(error.message))
   }
+
+
 
   return (
     <SafeAreaView style={styles.container}>   
