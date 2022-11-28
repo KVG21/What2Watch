@@ -1,15 +1,23 @@
-import { FlatList, Image, TouchableOpacity, Text} from 'react-native'
+import { FlatList, Image, TouchableOpacity, Text, View} from 'react-native'
 import {titleASC,titleDES,ratingASC,ratingDES,sortToGenres} from '../../utils/SortByFunctions'
 import {firestore, MOVIES, onSnapshot,query,collection } from '../../firebase'
 import { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/core'
 import styles from '../../styles/homescreen'
+import Icon from "react-native-vector-icons/Ionicons";
 
 export default function MovieScreen() {
 
     const [toggleSortedByDd, setToggleSortedByDd] = useState(false) // toggle between visible and hidden sorted by dropdownlist
     const [movies, setMovies] = useState([]) // array for movies
     const navigation = useNavigation()
+
+    const toEmbed = (value) => {
+      const url = value
+      const eurl = url.split('watch?v=')
+      const embed = eurl.join('embed/')
+      return embed
+    }
 
     useEffect(() => {
         const q = query(collection(firestore,MOVIES)) // query with route to movies in database
@@ -27,7 +35,7 @@ export default function MovieScreen() {
               Stars : doc.data().stars,
               Time : doc.data().time,
               Title : doc.data().title,
-              Trailer : doc.data().trailer
+              Trailer : toEmbed(doc.data().trailer)
             }
             tempArray.push(moviesObject) // push object into temporary array
           })
@@ -79,24 +87,30 @@ export default function MovieScreen() {
   return (
    <>
 
+  <View style={styles.sortRectangle}>
     <TouchableOpacity onPress = { () => setToggleSortedByDd(!toggleSortedByDd)}>
-        <Text style = {styles.buttonText}>Sort by:</Text>
+        <View style={styles.wrapper}>
+          <Text style = {styles.sortTitle}>Sort by:</Text>
+          <Icon name='list-circle-outline' style = {styles.icon}></Icon>
+        </View>
           { toggleSortedByDd ? (
           <>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(1)}>A -{'>'} Z</Text>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(2)}>Z -{'>'} A</Text>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(3)}>Rating : High -{'>'} Low</Text>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(4)}>Rating : Low -{'>'} High</Text>
-            <Text style = {styles.buttonText} onPress = { () => handleSortBy(5)}>Genres</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(1)}>A -{'>'} Z</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(2)}>Z -{'>'} A</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(3)}>Rating : High -{'>'} Low</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(4)}>Rating : Low -{'>'} High</Text>
+            <Text style = {styles.sortText} onPress = { () => handleSortBy(5)}>Genres</Text>
           </>) 
           : 
           (
             <></>
           ) }
     </TouchableOpacity>
+  </View>
 
 
      <FlatList
+          style={styles.imagesContainer}
           keyExtractor={(item) => item.id}
           data={movies}
           numColumns={2}

@@ -5,7 +5,7 @@ export default StyleSheet.create({
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      backgroundColor: "rgba(20,20,20,1)"
+      backgroundColor: "#333333"
     },
     underlineTextbox: {
       height: 45,
