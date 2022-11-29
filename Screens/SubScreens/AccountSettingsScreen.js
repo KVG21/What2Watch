@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, TextInput, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, FlatList, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import React, { useEffect, useState } from 'react'
 import styles from '../../styles/homescreen'
@@ -48,7 +48,15 @@ export default function AccountSettingsScreen() {
         </TouchableOpacity>
         
         <TouchableOpacity
-          onPress={handleDeleteUser}
+          onPress={() => Alert.alert(
+          'Alert',
+          'Are you sure?',
+          [
+            {text: 'Cancel', onPress: () => console.log('Canceled')},
+            {text: 'Delete account', onPress: handleDeleteUser},
+          ],
+          { cancelable: false }
+          )}
           style={styles.button}>
           <Text style={styles.buttonText}>Delete Account</Text>
         </TouchableOpacity>
