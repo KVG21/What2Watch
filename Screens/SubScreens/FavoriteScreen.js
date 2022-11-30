@@ -5,40 +5,30 @@ import MovieDescriptionScreen from './MovieDescriptionScreen';
 import SeriesDescriptionScreen from './SeriesDescriptionScreen';
 
 
-    const FavoriteScreen = () => {
-    const route = useRoute();
-    const { favoriteList } = route.params;
+export default function Favoritelist() {
+    const [favorite, setFavorite] = useState([]);
+    const [uid, setUid] = useRecoilState(userIDCheck);
   
-    return (
-      <FlatList
-        data={favoriteList}
-        renderItem={({ item }) => {
-          return (
-            <View style={styles.container}>
-              <View>
-                <Image
-                  source={{ uri: item['image'] }}
-                  style={styles.image}
-                  resizeMode='cover'
-                />
-              </View>
-              <View style={styles.container}>
-                <View style={styles.row}>
-                  <Text
-                    style={styles.text}
-                    allowFontScaling={true}
-                    numberOfLines={1}
-                  >
-                    {item && item['name']}
-                  </Text>
-                  <MaterialIcons name='' size={24} color={'#444'} />
-                </View>
-              </View>
-            </View>
-          );
-        }}
-      />
-    );
-  }
+    useEffect(() => {
+      db.collection("MOVIES, SERIES").onSnapshot((snapshot) => {
+        setFavorite(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            article: doc.data(),
+          }))
+        );
+      });
+    }, []);
 
-  export default FavoriteScreen
+    const favoriteList = favorite
+    .filter(() =>
+      db
+        .collection("users")
+        .doc(uid)
+        .collection("favorite")
+        .doc(MOVIES.id, SERIES.id)
+        .get()
+        .then((doc) => doc.data()?.isFavorite)
+    )
+
+}
