@@ -1,10 +1,15 @@
-import {View, Text} from 'react-native'
+import {View, Text, TouchableOpacity, Alert} from 'react-native'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
 import WebView from 'react-native-webview'
+import { useState } from 'react';
 
 export default function SeriesDescriptionScreen({route}) {
     const {item} = route.params;
+    const [favoriteList, setFavoriteList] = useState([]) // favorite the series
+    const onFavorite = Series => {
+      setFavoriteList([...favoriteList, Series]);
+    };
     return (
       <>
       {item.map((item, key) => {
@@ -36,8 +41,15 @@ export default function SeriesDescriptionScreen({route}) {
                   <Icon name='albums' style = {styles.icon}></Icon>
                   <Text style = {styles.descText}>{item.Genre}</Text>
 
+                  <TouchableOpacity
+                    onPress={() => Alert.alert('added to favorites'
+                    [
+                      {text: 'ok', onPress: setFavoriteList}
+                    ])}>
                   <Icon name='heart' style = {styles.icon}></Icon>
                   <Text style = {styles.descText}>Add to list</Text>
+                  </TouchableOpacity>
+                
                 </View>
 
 

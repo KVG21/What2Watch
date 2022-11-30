@@ -1,74 +1,44 @@
-import {View, Text} from 'react-native'
-import styles from '../../styles/login'
-import * as firebase from '../../firebase'
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { View, Text, TouchableOpacity, TextInput, FlatList, Alert } from 'react-native'
+import styles from '../../styles/homescreen'
+import MovieDescriptionScreen from './MovieDescriptionScreen';
+import SeriesDescriptionScreen from './SeriesDescriptionScreen';
 
 
-import {firestore, MOVIES, onSnapshot,query,collection } from '../../firebase'
-import { useState, useEffect } from 'react'
-import { useNavigation } from '@react-navigation/core'
-import { SERIES} from '../../firebase'
-import {titleASC,titleDES,ratingASC,ratingDES,sortToGenres} from '../../utils/SortByFunctions'
-
-export default function favorites() {
-const [favorite, setFavorite] = useState([]);
-
-const Favorite = MOVIES => {
-  setFavorite([...favorite, MOVIES]);
-};
-
-  // function to remove an item from favorite list
-  const onRemoveFavorite = MOVIES => {
-    const filteredList = favorite.filter(
-      item => item.id !== MOVIES.id
+    const FavoriteScreen = () => {
+    const route = useRoute();
+    const { favoriteList } = route.params;
+  
+    return (
+      <FlatList
+        data={favoriteList}
+        renderItem={({ item }) => {
+          return (
+            <View style={styles.container}>
+              <View>
+                <Image
+                  source={{ uri: item['image'] }}
+                  style={styles.image}
+                  resizeMode='cover'
+                />
+              </View>
+              <View style={styles.container}>
+                <View style={styles.row}>
+                  <Text
+                    style={styles.text}
+                    allowFontScaling={true}
+                    numberOfLines={1}
+                  >
+                    {item && item['name']}
+                  </Text>
+                  <MaterialIcons name='' size={24} color={'#444'} />
+                </View>
+              </View>
+            </View>
+          );
+        }}
+      />
     );
-    setFavorite(filteredList);
-  };
+  }
 
-  // function to check if an item exists in the favorite list or not
-  const ifExists = MOVIES => {
-    if (favorite.filter(item => item.id === MOVIES.id).length > 0) {
-      return true;
-    }
-    return false;
-  };
-
-  // rest of the code remains the same
-};
-
-useEffect(() => {
-  db.collection("MOVIES").onSnapshot((snapshot) => {
-    setFavorite(
-      snapshot.docs.map((doc) => ({
-        id: doc.id,
-        MOVIES: doc.data(),
-      }))
-    );
-  });
-}, []);
-
-firestore()
-        .collection("users")
-        .doc(uid)
-        .collection("favorite")
-        .get()
-.then(querySnapshot => {
- querySnapshot.forEach(querySnapshot => {
-// update state array with article id
-    });
-  });
-
-
-firestore()
-  .collection(MOVIES, SERIES)
-  .where('id', 'in',[arrayOfFavoriteID])
-  .get()
-  .then(querySnapshot => {
-  // updateState for div to map through and render
-  });
-
-
-
-
-
-
-}
+  export default FavoriteScreen

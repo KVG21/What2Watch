@@ -8,6 +8,7 @@ import Signup from './Screens/SingupScreen';
 import SeriesDescriptionScreen from './Screens/SubScreens/SeriesDescriptionScreen';
 import AccountSettingsScreen from './Screens/SubScreens/AccountSettingsScreen';
 import ForgotPasswordScreen from './Screens/ForgotPasswordScreen';
+//import FavoriteScreen from './SubScreens/FavoriteScreen'
 
 const Stack = createNativeStackNavigator();
 
