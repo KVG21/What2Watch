@@ -1,11 +1,13 @@
-import { View, Text} from 'react-native'
+import { View, Text, TouchableOpacity} from 'react-native'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
 import WebView from "react-native-webview"
+import { useState } from 'react';
 
 
 export default function MovieDescriptionScreen({route}) {
     const {item} = route.params;
+    const [favoriteList, setFavoriteList] = useState([]) // favorite the movie
   return (
     <>
     {item.map((item, key) => {
@@ -35,8 +37,10 @@ export default function MovieDescriptionScreen({route}) {
                   <Icon name='albums' style = {styles.icon}></Icon>
                   <Text style = {styles.descText}>{item.Genre}</Text>
 
+                  <TouchableOpacity>
                   <Icon name='heart' style = {styles.icon}></Icon>
                   <Text style = {styles.descText}>Add to list</Text>
+                  </TouchableOpacity>
                 </View>
 
                 <Text style = {styles.descDir}>Director : {item.Director}</Text>
