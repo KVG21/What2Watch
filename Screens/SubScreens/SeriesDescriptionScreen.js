@@ -1,11 +1,22 @@
 import {View, Text,TouchableOpacity} from 'react-native'
+import { useState, useEffect } from 'react'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
 import WebView from 'react-native-webview'
 import { FAVOURITES, addDoc, collection, firestore, getAuth } from '../../firebase';
 
 export default function SeriesDescriptionScreen({route}) {
-    const {item} = route.params;  
+
+    const {item} = route.params;
+    const [isAnonymous, setIsAnoymoys ] = useState(true);
+    
+
+    useEffect(() => {
+      const auth = getAuth()
+        if(auth.currentUser === null) {
+          setIsAnoymoys(false)
+        }
+    })
 
     const handleFavoriteAdd= async(item) => {
       const uid = getAuth()
@@ -57,11 +68,13 @@ export default function SeriesDescriptionScreen({route}) {
                   <Icon name='albums' style = {styles.icon}></Icon>
                   <Text style = {styles.descText}>{item.Genre}</Text>
 
-                  <TouchableOpacity
-                    onPress={() => handleFavoriteAdd(item)}>
-                  <Icon name='heart' style = {styles.icon}></Icon>
-                  <Text style = {styles.descText}>Add to list</Text>
-                  </TouchableOpacity>
+                {isAnonymous ? (<>
+                    <TouchableOpacity
+                      onPress={() => handleFavoriteAdd(item)}>
+                    <Icon name='heart' style = {styles.icon}></Icon>
+                    <Text style = {styles.descText}>Add to list</Text>
+                    </TouchableOpacity>
+                </>) : (<></>)}      
                 </View>
 
 

@@ -1,4 +1,5 @@
 import { View, Text, TouchableOpacity} from 'react-native'
+import { useState, useEffect } from 'react'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
 import WebView from "react-native-webview"
@@ -6,7 +7,16 @@ import { FAVOURITES, addDoc, collection, firestore, getAuth } from '../../fireba
 
 
 export default function MovieDescriptionScreen({route}) {
+
     const {item} = route.params;
+    const [isAnonymous, setIsAnoymoys ] = useState(true);
+
+    useEffect(() => {
+      const auth = getAuth()
+        if(auth.currentUser === null) {
+          setIsAnoymoys(false)
+        }
+    })
     
     const handleFavoriteAdd= async(item) => {
       const uid = getAuth()
@@ -54,11 +64,13 @@ export default function MovieDescriptionScreen({route}) {
                   <Icon name='albums' style = {styles.icon}></Icon>
                   <Text style = {styles.descText}>{item.Genre}</Text>
 
+                {isAnonymous ? (<>
                   <TouchableOpacity
-                    onPress={() => handleFavoriteAdd(item)}>
-                  <Icon name='heart' style = {styles.icon}></Icon>
-                  <Text style = {styles.descText}>Add to list</Text>
+                      onPress={() => handleFavoriteAdd(item)}>
+                    <Icon name='heart' style = {styles.icon}></Icon>
+                    <Text style = {styles.descText}>Add to list</Text>
                   </TouchableOpacity>
+                </>) : (<></>)}   
                 </View>
 
                 <Text style = {styles.descDir}>Director : {item.Director}</Text>

@@ -1,8 +1,22 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Alert } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import {getAuth, signOut} from '../firebase'
+import { useNavigation } from "@react-navigation/native";
 
-function IconButtonsFooter({style, setScreen}) {
+
+function IconButtonsFooter({style, setScreen, isAnonymous}) {
+
+  const navigation = useNavigation()
+  const handleSignOut = () => {
+    const auth = getAuth()
+      signOut(auth)
+      .then(() => {
+        navigation.replace("Login")
+      })
+      .catch(error => alert(error.message))
+  }
+
   return (
     <View style={[styles.container, style]}>
       
@@ -19,7 +33,7 @@ function IconButtonsFooter({style, setScreen}) {
             style={styles.icon}
             ></Icon>
         </TouchableOpacity>
-
+      {isAnonymous ? (<>
         <TouchableOpacity onPress =  {() => setScreen(3)}>
             <Icon
             name="star"
@@ -33,6 +47,16 @@ function IconButtonsFooter({style, setScreen}) {
             style={styles.icon}
             ></Icon>
         </TouchableOpacity>
+      </>) : (<>
+        <TouchableOpacity onPress={() => handleSignOut()}>
+            <View style={styles.profileCont}>
+                <Icon
+                    name='log-out-outline'
+                    style={styles.icon}
+                ></Icon>
+                </View>
+        </TouchableOpacity>
+     </>)} 
     </View>
   );
 }
