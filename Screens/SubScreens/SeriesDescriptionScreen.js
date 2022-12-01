@@ -1,12 +1,13 @@
-import {View, Text} from 'react-native'
+import {View, Text,TouchableOpacity} from 'react-native'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
 import WebView from 'react-native-webview'
-import { useState } from 'react';
 import { FAVOURITES, addDoc, collection, firestore, getAuth } from '../../firebase';
+
+
 export default function SeriesDescriptionScreen({route}) {
-    const {item} = route.params;
-    
+    const {item} = route.params;  
+
     const handleFavoriteAdd= async(item) => {
       const uid = getAuth()
         const docRef = await addDoc(collection (firestore,FAVOURITES),{
@@ -20,7 +21,6 @@ export default function SeriesDescriptionScreen({route}) {
               Stars : item.Stars,
               Time : item.Time,
               Title : item.Title,
-
         }).catch(error => console.log(error))
     }
 

@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, TextInput, FlatList, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from '../../styles/homescreen'
 import UnderlineTextbox from '../../materialComponents/UnderlineTextbox'
 import {getAuth, sendPasswordResetEmail, deleteUser} from 'firebase/auth'

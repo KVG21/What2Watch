@@ -8,7 +8,7 @@ import IconButtonsFooter from '../materialComponents/IconButtonFooter'
 import MovieScreen from './SubScreens/MovieScreen'
 import SeriesScreen from './SubScreens/SeriesScreen'
 import AccountSettingsScreen from './SubScreens/AccountSettingsScreen'
-import FavouriteScreen from './SubScreens/FavouriteScreen'
+import Recommendations from './SubScreens/Recommendations'
 
 export default function HomeScreen() {
 
@@ -22,7 +22,7 @@ export default function HomeScreen() {
     } else if(screen === 2) {
       return ( <SeriesScreen/> )
     } else if(screen === 3) {
-      return ( <FavouriteScreen/> )
+      return ( <Recommendations/> )
     } else if(screen === 4) { 
       return (<AccountSettingsScreen/>)
     } else if(screen === 5) {
