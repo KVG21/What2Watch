@@ -1,6 +1,6 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, FlatList, Alert, Image } from 'react-native'
+import { TouchableOpacity, FlatList, Image } from 'react-native'
 import styles from '../../styles/homescreen'
 import { FAVOURITES, onSnapshot, query, collection, where, firestore, getAuth, deleteDoc, doc } from '../../firebase';
 

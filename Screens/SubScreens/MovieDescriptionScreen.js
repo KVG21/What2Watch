@@ -4,10 +4,10 @@ import Icon from "react-native-vector-icons/Ionicons";
 import WebView from "react-native-webview"
 import { FAVOURITES, addDoc, collection, firestore, getAuth } from '../../firebase';
 
+
 export default function MovieDescriptionScreen({route}) {
     const {item} = route.params;
     
-  
     const handleFavoriteAdd= async(item) => {
       const uid = getAuth()
         const docRef = await addDoc(collection (firestore,FAVOURITES),{
