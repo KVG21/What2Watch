@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text } from 'react-native'
+import { View, TouchableOpacity, Text, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { getAuth, signOut} from '../../firebase'
@@ -50,7 +50,13 @@ export default function Profile() {
                 </View>
         </TouchableOpacity>      
 
-        <TouchableOpacity onPress={handleSignOut}>
+        <TouchableOpacity onPress={() => Alert.alert(
+            'Login out',
+            'Confirm your login out',
+            [{text: 'Cancel', onPress: () => console.log('Canceled')},
+                {text: 'Log out', onPress: handleSignOut},],
+            { cancelable: false }
+        )}>
             <View style={styles.profileCont}>
                 <Icon
                     name='log-out-outline'
