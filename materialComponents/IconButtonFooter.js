@@ -1,45 +1,38 @@
 import React, { Component } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/Ionicons";
 
 function IconButtonsFooter({style, setScreen}) {
   return (
     <View style={[styles.container, style]}>
       
       <TouchableOpacity onPress = {() => setScreen(1) }>
-        <MaterialCommunityIconsIcon
-          name="video-vintage"
+        <Icon
+          name="film-outline"
           style={styles.icon}
-        ></MaterialCommunityIconsIcon>
+        ></Icon>
       </TouchableOpacity>
 
         <TouchableOpacity onPress = {() => setScreen(2)}>
-            <MaterialCommunityIconsIcon
-            name="television"
+            <Icon
+            name="tv-outline"
             style={styles.icon}
-            ></MaterialCommunityIconsIcon>
+            ></Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress =  {() => setScreen(3)}>
-            <MaterialCommunityIconsIcon
-            name="star-face"
+            <Icon
+            name="star"
             style={styles.icon}
-            ></MaterialCommunityIconsIcon>
+            ></Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress = {() => setScreen(4)}>
-            <MaterialCommunityIconsIcon
-            name="account"
+            <Icon
+            name="person"
             style={styles.icon}
-            ></MaterialCommunityIconsIcon>
+            ></Icon>
         </TouchableOpacity>
-        
-      <TouchableOpacity onPress = {() => setScreen(5)}>
-        <MaterialCommunityIconsIcon
-          name="door"
-          style={styles.icon}
-        ></MaterialCommunityIconsIcon>
-      </TouchableOpacity>
     </View>
   );
 }

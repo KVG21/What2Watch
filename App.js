@@ -8,6 +8,7 @@ import Signup from './Screens/SingupScreen';
 import SeriesDescriptionScreen from './Screens/SubScreens/SeriesDescriptionScreen';
 import AccountSettingsScreen from './Screens/SubScreens/AccountSettingsScreen';
 import ForgotPasswordScreen from './Screens/ForgotPasswordScreen';
+import FavouriteScreen from './Screens/SubScreens/FavouriteScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,20 @@ export default function App() {
           }
         }}
         name="SdesScreen" component={SeriesDescriptionScreen}/>
+
+        <Stack.Screen options={{title:'', 
+        headerTintColor:'rgba(145,98,228,1)',
+        headerStyle:{
+          backgroundColor:'#4f4f4f',
+          }
+        }} name="AccountSettingsScreen" component={AccountSettingsScreen}/>
+
+        <Stack.Screen options={{title:'', 
+        headerTintColor:'rgba(145,98,228,1)',
+        headerStyle:{
+          backgroundColor:'#4f4f4f',
+          }
+        }} name="FavouriteScreen" component={FavouriteScreen}/>
         
       </Stack.Navigator>
     </NavigationContainer>

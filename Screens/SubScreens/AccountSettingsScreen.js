@@ -1,9 +1,10 @@
-import { View, Text, TouchableOpacity, TextInput, FlatList, Alert } from 'react-native'
+import { View, Text, TouchableOpacity, Alert } from 'react-native'
 import { useNavigation } from '@react-navigation/core'
-import React, { useEffect, useState } from 'react'
-import styles from '../../styles/homescreen'
+import React, { useState } from 'react'
+import styles from '../../styles/account'
 import UnderlineTextbox from '../../materialComponents/UnderlineTextbox'
 import {getAuth, sendPasswordResetEmail, deleteUser} from 'firebase/auth'
+import Icon from "react-native-vector-icons/Ionicons";
 
 export default function AccountSettingsScreen() {
 
@@ -31,12 +32,12 @@ export default function AccountSettingsScreen() {
   return (
     <View style={styles.container}
     behavior="padding">
-      <TouchableOpacity
-          style={styles.button}>
-          <Text style={styles.buttonText}>{auth.currentUser?.email}</Text>
-          <Text style={styles.buttonText}>Creation time: {creationTime}</Text>
-        </TouchableOpacity>
 
+      <View style={styles.userContainer}>
+        <Icon name="person-circle-outline" style={styles.icon}></Icon>
+          <Text style={styles.email}>{auth.currentUser?.email}</Text>
+          <Text style={styles.buttonText}>Creation time: {creationTime}</Text>
+      </View>
         <UnderlineTextbox
         setEmail = { setEmail }
         email = { email }

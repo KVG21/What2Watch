@@ -2,8 +2,8 @@ import {View, Text} from 'react-native'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
 import WebView from 'react-native-webview'
-import { useState } from 'react';
 import { FAVOURITES, addDoc, collection, firestore, getAuth } from '../../firebase';
+
 export default function SeriesDescriptionScreen({route}) {
     const {item} = route.params;
     
@@ -42,6 +42,9 @@ export default function SeriesDescriptionScreen({route}) {
                 </View>
 
                 <WebView 
+                allowsFullscreenVideo={true}
+                scrollEnabled={false}
+                bounces={false}
                 source={{uri: item.Trailer}}
                 style={styles.webview}/>
 
