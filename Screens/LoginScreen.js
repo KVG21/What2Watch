@@ -54,6 +54,7 @@ const LoginScreen = () => {
         style={styles.iconTextbox}
       />
 
+      <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={handleLogin}
           style={styles.button}>
@@ -62,21 +63,22 @@ const LoginScreen = () => {
 
         <TouchableOpacity
           onPress={notUser}
-          style={styles.buttonOutline}>
-          <Text style={styles.buttonOutlineText}>Not a user? Signup</Text>
+          style={styles.button}>
+          <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={anonymosLogin}
           style={styles.button}>
-          <Text style={styles.buttonText}>Anonymous Login</Text>
+          <Text style={styles.buttonText}>Login without account</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={forgotPassword}
           style={styles.button}>
-          <Text style={styles.buttonText}>Forgot password? Reset via email</Text>
+          <Text style={styles.buttonText}>Forgot password?</Text>
         </TouchableOpacity>
+        </View>
     </View>
   )
 }

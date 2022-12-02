@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import {getAuth, signOut} from '../firebase'
 import { useNavigation } from "@react-navigation/native";
@@ -63,7 +63,7 @@ function IconButtonsFooter({style, setScreen, isAnonymous}) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 380,
+    width: Dimensions.get('window').width,
     height:60,
     backgroundColor: "rgba(94,53,177,1)",
     flexDirection: "row",

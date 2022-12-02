@@ -16,9 +16,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen options={{ headerShown: false }} name="Login" component={LoginScreen} />
+        <Stack.Screen options={{ headerShown: false }}  name="Login" component={LoginScreen} />
         <Stack.Screen options={{ headerShown: false }} name="Signup" component={Signup} />
-        <Stack.Screen options={{ headerShown: false }} name="forgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen 
+        options={{ title:'', 
+        headerTintColor:'rgba(145,98,228,1)',
+        headerStyle:{
+          backgroundColor:'#4f4f4f',
+          } }} name="forgotPassword" component={ForgotPasswordScreen} />
+          
         <Stack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
 
         <Stack.Screen 

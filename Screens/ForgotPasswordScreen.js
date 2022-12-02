@@ -36,12 +36,6 @@ const ForgotPasswordScreen = () => {
           style={styles.button}>
           <Text style={styles.buttonText}>Reset via email</Text>
         </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={backLogin}
-          style={styles.button}>
-          <Text style={styles.buttonText}>Back to Login Screen</Text>
-        </TouchableOpacity>
         </View>
   )
 }

@@ -17,10 +17,12 @@ export default StyleSheet.create({
       width:300,
     },
     button: {
-      width: 150,
+      padding: 5,
+      width: 130,
       height: 59,
       backgroundColor: "rgba(94,53,177,1)",
       borderRadius: 10,
+      borderWidth: 1,
       alignItems: 'center',
       justifyContent: 'center',
       marginTop:22,
@@ -29,18 +31,10 @@ export default StyleSheet.create({
       color: "white",
       fontSize: 16,
     },
-    buttonOutline: {
-      width: 150,
-      height: 59,
-      backgroundColor: "rgba(20,20,20,1)",
-      borderWidth: 2,
-      borderColor: "rgba(94,53,177,1)",
-      borderRadius: 10,
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginTop: 22,
-    },
-    buttonOutlineText: {
-      color: "white",
-    },
+    buttonContainer:{
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: 'space-around',
+      marginHorizontal: 37,
+    }
   })
