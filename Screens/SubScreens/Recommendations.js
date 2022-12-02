@@ -1,13 +1,17 @@
-import { TouchableOpacity, Text, FlatList, Image }from 'react-native'
+import { TouchableOpacity, Text, Image, View, FlatList }from 'react-native'
 import { useEffect, useState } from 'react'
 import {firestore, MOVIES,SERIES, onSnapshot,query,collection } from '../../firebase'
-import styles from '../../styles/homescreen'
+import Icon from "react-native-vector-icons/Ionicons";
+import WebView from "react-native-webview"
+import styles from '../../styles/descScreens'
+import button from '../../styles/login'
 
 export default function Recommendations() {
 
     const [movies, setMovies] = useState([]) // array for movies
     const [series, setSeries] = useState([]) // array for series
     const [suprise, setSuprise] = useState([]) //array for the random movie or serie
+
 
     const toEmbed = (value) => {
         const url = value
@@ -71,35 +75,68 @@ export default function Recommendations() {
         }
       }, [])
 
-    const handleSuprise = () => { // handleSuprise, select movie or serie with random index
+    const handleSuprise = (value) => { // handleSuprise, select movie or serie with random index
         const tempArray = [] // temporary array
-        const switcher = Math.floor(Math.random()*2) // switch between movies and series
         const index = Math.floor(Math.random()*100)  //random index between 0-99
-            if (switcher === 1) {
+            if (value === 1) {
+
                 tempArray.push(movies[index]) //use the random index to push from movies to tempArray
-            } else if (switcher === 0) {
+            } else if (value === 2) {
                 tempArray.push(series[index]) //use the random index to push from series to tempArray
             }
             setSuprise(tempArray) //set tempArray to suprise array
     } 
 
   return (<>
-    <TouchableOpacity onPress={() => handleSuprise()}>
-        <Text style = {styles.buttonText}>Suprise Me</Text>
+
+  <View style = {button.buttonContainer}>
+    <TouchableOpacity style  = {button.button} onPress={() => handleSuprise(1)}>
+      <Text style = {styles.buttonText}>Random movie</Text>
     </TouchableOpacity>
-    <FlatList
+    
+    <TouchableOpacity style  = {button.button} onPress={() => handleSuprise(2)}>
+      <Text style = {styles.buttonText}>Random serie</Text>
+    </TouchableOpacity>
+  </View>
+    
+    <FlatList 
           style={styles.imagesContainer}
           keyExtractor={(item) => item.id}
           data={suprise}
-          numColumns={2}
-          renderItem={({ item }) => ( 
-            <>
-              <Image source={{ uri: item.Photo }}
-              style={styles.image}
-              resizeMode='contain'></Image>
-            </>
-          )}
-        /> 
+          numColumns={1}
+          renderItem={({ item }) => (<>
+
+          <View style = { styles.container}>
+          <Text style = {styles.title}>{item.Title}</Text>
+
+          <View style = { styles.timeCont}>
+            <Icon name='time' style = {styles.timeIcon}></Icon>
+            <Text style = {styles.time}>{item.Time}</Text>
+          </View>
+
+          <Image source={{ uri: item.Photo }}
+                  style={styles.image}
+                resizeMode='contain'/>
+
+          <View style = {styles.iconRow}>
+            <Icon name='eye' style = {styles.icon}></Icon>
+            <Text style = {styles.descText}>{item.PgR}</Text>
+
+            <Icon name='star' style={styles.icon}></Icon>
+            <Text style = {styles.descText}>{item.Rating}</Text>
+
+            <Icon name='albums' style = {styles.icon}></Icon>
+            <Text style = {styles.descText}>{item.Genre}</Text>
+          </View>
+
+          <Text style = {styles.descStars}>Stars : {item.Stars}</Text>
+
+                <View style = { styles.descBox}>
+                <Text style = {styles.textDesc}>Desc : {item.Description}</Text></View>
+          </View>
+          
+          </> ) }
+    />
   </>  
   )
 }

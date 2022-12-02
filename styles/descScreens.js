@@ -54,6 +54,13 @@ export default StyleSheet.create({
         marginTop:28,
         marginLeft:10,
     },
+    image:{
+        width:157,
+        height:203,
+        marginBottom:20,
+        marginLeft:5,
+        marginRight:5,
+      },
     descBox:{
         width: Dimensions.get('window').width,
         backgroundColor: "rgba(37,37,37,1)",
