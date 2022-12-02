@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 export default StyleSheet.create({
     container: {
@@ -55,10 +55,9 @@ export default StyleSheet.create({
         marginLeft:10,
     },
     descBox:{
-        width:350,
+        width: Dimensions.get('window').width,
         backgroundColor: "rgba(37,37,37,1)",
         marginTop: 40,
-        marginHorizontal: 15,
         paddingBottom:50,
         paddingHorizontal:10,
     },
@@ -74,6 +73,5 @@ export default StyleSheet.create({
     },
     webview: {
         margin:15,
-        
     }
 })

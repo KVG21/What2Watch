@@ -85,6 +85,7 @@ export default function SeriesScreen() {
 
   return (
    <>
+     <Text style={styles.title}>Series</Text>
      <View style={styles.sortRectangle}>
       <TouchableOpacity onPress = { () => setToggleSortedByDd(!toggleSortedByDd)}>
         <View style={styles.wrapper}>

@@ -23,11 +23,25 @@ export default StyleSheet.create({
         flexDirection:'row',
         justifyContent: 'flex-start',
         alignItems: 'center',
-        borderWidth: 2,
+        borderWidth: 1,
         width: Dimensions.get('window').width,
         height: 100,
-        backgroundColor:'#4d4d4d',
-        marginTop: 20,
+        backgroundColor:'#333333',
+        marginTop: 1,
     },
+    userContainer: {
+        flexDirection:'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginRight:100,
+        height: 100,
+        marginTop:50,
+    },
+    cardsContainer: {
+        flex:1,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginBottom: 50,
+    }
 
 })

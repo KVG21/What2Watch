@@ -11,7 +11,6 @@ export default function AccountSettingsScreen() {
   const navigation = useNavigation();
   const [email, setEmail] = useState('')
   const auth = getAuth()
-  const uid = uid;
   let creationTime = auth.currentUser.metadata.creationTime
 
 
@@ -30,24 +29,29 @@ export default function AccountSettingsScreen() {
     }
 
   return (
-    <View style={styles.container}
-    behavior="padding">
+  <View style={styles.container}>
 
       <View style={styles.userContainer}>
         <Icon name="person-circle-outline" style={styles.icon}></Icon>
-          <Text style={styles.email}>{auth.currentUser?.email}</Text>
-          <Text style={styles.buttonText}>Creation time: {creationTime}</Text>
+        <Text style={styles.email}>{auth.currentUser?.email}</Text>
       </View>
-        <UnderlineTextbox
-        setEmail = { setEmail }
-        email = { email }
-        style={styles.underlineTextbox}/>
+      <Text style={styles.text}>Creation time: {creationTime}</Text>
+
+    <View style={styles.optionsContainer}>
+      <View>
+        <Text style={styles.text}>Reset password:</Text>
+          <UnderlineTextbox
+          setEmail = { setEmail }
+          email = { email }
+          style={styles.underlineTextbox}/>
+        </View>
+
         <TouchableOpacity
-          onPress={updatePassword}
-          style={styles.button}>
-          <Text style={styles.buttonText}>Reset via email</Text>
-        </TouchableOpacity>
-        
+            onPress={updatePassword}
+            style={styles.button}>
+            <Text style={styles.buttonText}>Send password reset request</Text>
+          </TouchableOpacity>
+
         <TouchableOpacity
           onPress={() => Alert.alert(
           'Alert',
@@ -61,7 +65,7 @@ export default function AccountSettingsScreen() {
           style={styles.button}>
           <Text style={styles.buttonText}>Delete Account</Text>
         </TouchableOpacity>
-</View>
-
+      </View>
+  </View>
   )
 }

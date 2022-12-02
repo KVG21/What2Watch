@@ -68,8 +68,9 @@ export default function MovieDescriptionScreen({route}) {
                   <TouchableOpacity
                       onPress={() => handleFavoriteAdd(item)}>
                     
-                    <Text style = {styles.descText}><Icon name='heart' style = {styles.icon}></Icon></Text>
+                    <Icon name='heart' style = {styles.icon}></Icon>
                   </TouchableOpacity>
+                  <Text style = {styles.descText}>Add to my list</Text>
                 </>) : (<></>)}   
                 </View>
 

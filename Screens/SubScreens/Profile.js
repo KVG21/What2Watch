@@ -8,6 +8,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 export default function Profile() {
 
+    const auth = getAuth()
     const navigation = useNavigation()
 
     const accountSettings = () => {
@@ -29,42 +30,54 @@ export default function Profile() {
     
   return (
     <View style={styles.container}>
-
-        <TouchableOpacity onPress = { accountSettings }>
-            <View style={styles.profileCont}>
-                <Icon
-                    name='at'
-                    style={styles.icon}
+        <Text style={styles.text}>Profile</Text>
+        <View style={styles.userContainer}>
+            <Icon 
+                name="person-circle"
+                style={styles.icon}
                 ></Icon>
-                <Text style={styles.text}>Account Settings</Text>
-            </View>
-        </TouchableOpacity>
+            <Text style={styles.text}>{auth.currentUser?.email}</Text>
+        </View>
 
-        <TouchableOpacity onPress={favourites}>
-            <View style={styles.profileCont}>
-                <Icon
-                    name='heart'
-                    style={styles.icon}
-                ></Icon>
-                <Text style={styles.text}>My List</Text>
+
+        <View style={styles.cardsContainer}>
+            <Text style={styles.text}> Options </Text>
+            <TouchableOpacity onPress = { accountSettings }>
+                <View style={styles.profileCont}>
+                    <Icon
+                        name='at'
+                        style={styles.icon}
+                    ></Icon>
+                    <Text style={styles.text}>Account Settings</Text>
                 </View>
-        </TouchableOpacity>      
+            </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => Alert.alert(
-            'Login out',
-            'Confirm your login out',
-            [{text: 'Cancel', onPress: () => console.log('Canceled')},
-                {text: 'Log out', onPress: handleSignOut},],
-            { cancelable: false }
-        )}>
-            <View style={styles.profileCont}>
-                <Icon
-                    name='log-out-outline'
-                    style={styles.icon}
-                ></Icon>
-                <Text style={styles.text}>Log out</Text>
-                </View>
-        </TouchableOpacity>    
+            <TouchableOpacity onPress={favourites}>
+                <View style={styles.profileCont}>
+                    <Icon
+                        name='heart'
+                        style={styles.icon}
+                    ></Icon>
+                    <Text style={styles.text}>My List</Text>
+                    </View>
+            </TouchableOpacity>      
+
+            <TouchableOpacity onPress={() => Alert.alert(
+                'Login out',
+                'Confirm your login out',
+                [{text: 'Cancel', onPress: () => console.log('Canceled')},
+                    {text: 'Log out', onPress: handleSignOut},],
+                { cancelable: false }
+            )}>
+                <View style={styles.profileCont}>
+                    <Icon
+                        name='log-out-outline'
+                        style={styles.icon}
+                    ></Icon>
+                    <Text style={styles.text}>Log out</Text>
+                    </View>
+            </TouchableOpacity>    
+        </View>
     </View>
   )
   
