@@ -66,11 +66,12 @@ export default function MovieDescriptionScreen({route}) {
 
                 {isAnonymous ? (<>
                   <TouchableOpacity
+                      style={styles.listButtonStyle}
                       onPress={() => handleFavoriteAdd(item)}>
                     
                     <Icon name='heart' style = {styles.icon}></Icon>
+                    <Text style = {styles.descText}>Add to my list</Text>
                   </TouchableOpacity>
-                  <Text style = {styles.descText}>Add to my list</Text>
                 </>) : (<></>)}   
                 </View>
 
@@ -78,7 +79,7 @@ export default function MovieDescriptionScreen({route}) {
                 <Text style = {styles.descStars}>Stars : {item.Stars}</Text>
 
                 <View style = { styles.descBox}>
-                <Text style = {styles.textDesc}>Desc : {item.Description}</Text>
+                <Text style = {styles.textDesc}>{item.Description}</Text>
                 </View>
             </View>
         )

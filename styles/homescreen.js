@@ -22,7 +22,7 @@ export default StyleSheet.create({
     image:{
       width:180,
       height:250,
-      marginBottom:20,
+      marginBottom:10,
       marginLeft:5,
       marginRight:5,
     },

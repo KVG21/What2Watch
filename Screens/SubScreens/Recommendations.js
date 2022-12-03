@@ -2,15 +2,14 @@ import { TouchableOpacity, Text, Image, View, FlatList }from 'react-native'
 import { useEffect, useState } from 'react'
 import {firestore, MOVIES,SERIES, onSnapshot,query,collection } from '../../firebase'
 import Icon from "react-native-vector-icons/Ionicons";
-import WebView from "react-native-webview"
 import styles from '../../styles/descScreens'
-import button from '../../styles/login'
+
 
 export default function Recommendations() {
 
     const [movies, setMovies] = useState([]) // array for movies
     const [series, setSeries] = useState([]) // array for series
-    const [suprise, setSuprise] = useState([]) //array for the random movie or serie
+    const [surprise, setSurprise] = useState([]) //array for the random movie or serie
 
 
     const toEmbed = (value) => {
@@ -75,7 +74,7 @@ export default function Recommendations() {
         }
       }, [])
 
-    const handleSuprise = (value) => { // handleSuprise, select movie or serie with random index
+    const handleSurprise = (value) => { // handleSurprise, select movie or serie with random index
         const tempArray = [] // temporary array
         const index = Math.floor(Math.random()*100)  //random index between 0-99
             if (value === 1) {
@@ -84,17 +83,17 @@ export default function Recommendations() {
             } else if (value === 2) {
                 tempArray.push(series[index]) //use the random index to push from series to tempArray
             }
-            setSuprise(tempArray) //set tempArray to suprise array
+            setSurprise(tempArray) //set tempArray to Surprise array
     } 
 
   return (<>
 
-  <View style = {button.buttonContainer}>
-    <TouchableOpacity style  = {button.button} onPress={() => handleSuprise(1)}>
+  <View style = {styles.buttonContainer}>
+    <TouchableOpacity style  = {styles.button} onPress={() => handleSurprise(1)}>
       <Text style = {styles.buttonText}>Random movie</Text>
     </TouchableOpacity>
     
-    <TouchableOpacity style  = {button.button} onPress={() => handleSuprise(2)}>
+    <TouchableOpacity style  = {styles.button} onPress={() => handleSurprise(2)}>
       <Text style = {styles.buttonText}>Random serie</Text>
     </TouchableOpacity>
   </View>
@@ -102,7 +101,7 @@ export default function Recommendations() {
     <FlatList 
           style={styles.imagesContainer}
           keyExtractor={(item) => item.id}
-          data={suprise}
+          data={surprise}
           numColumns={1}
           renderItem={({ item }) => (<>
 
@@ -114,10 +113,11 @@ export default function Recommendations() {
             <Text style = {styles.time}>{item.Time}</Text>
           </View>
 
+        <View style = { styles.recommendedContainer}>
           <Image source={{ uri: item.Photo }}
-                  style={styles.image}
+                  style={styles.recommendedImage}
                 resizeMode='contain'/>
-
+        </View>
           <View style = {styles.iconRow}>
             <Icon name='eye' style = {styles.icon}></Icon>
             <Text style = {styles.descText}>{item.PgR}</Text>
@@ -132,9 +132,9 @@ export default function Recommendations() {
           <Text style = {styles.descStars}>Stars : {item.Stars}</Text>
 
                 <View style = { styles.descBox}>
-                <Text style = {styles.textDesc}>Desc : {item.Description}</Text></View>
-          </View>
-          
+                  <Text style = {styles.textDesc}>{item.Description}</Text>
+                </View>
+              </View>
           </> ) }
     />
   </>  
