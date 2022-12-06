@@ -4,6 +4,7 @@ import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
 import WebView from "react-native-webview"
 import { FAVOURITES, addDoc, collection, firestore, getAuth } from '../../firebase';
+import Toast from 'react-native-toast-message';
 
 
 export default function MovieDescriptionScreen({route}) {
@@ -35,12 +36,22 @@ export default function MovieDescriptionScreen({route}) {
         }).catch(error => console.log(error))
     }
 
+    const showToast = () => {
+      Toast.show({
+        position: 'top',
+        text1: 'Movie added to my list',
+        text2:'   ',
+        visibilityTime: 5000,
+      });
+    }
+
   return (
     <>
     {item.map((item, key) => {
         return (
             <View style = { styles.container} key = {key}>
                 <Text style = {styles.title}>{item.Title}</Text>
+                <Toast/>
 
                 <View style = { styles.timeCont}>
                   <Icon name='time' style = {styles.timeIcon}></Icon>
@@ -67,7 +78,7 @@ export default function MovieDescriptionScreen({route}) {
                 {isAnonymous ? (<>
                   <TouchableOpacity
                       style={styles.listButtonStyle}
-                      onPress={() => handleFavoriteAdd(item)}>
+                      onPress={() => {handleFavoriteAdd(item); showToast()}}>
                     
                     <Icon name='heart' style = {styles.icon}></Icon>
                     <Text style = {styles.descText}>Add to my list</Text>
