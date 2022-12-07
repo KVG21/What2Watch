@@ -40,7 +40,7 @@ export default function FavouriteScreen() {
     const handleDelete = (item) => {
       const docRef=doc (firestore, FAVOURITES, item.id)
       deleteDoc(docRef) .then(()=> {
-        console.log('elokuva poistettu')
+        
       }).catch(error => console.log(error))
     }
 

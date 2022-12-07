@@ -3,19 +3,48 @@ import { useState, useEffect } from 'react'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
 import WebView from 'react-native-webview'
-import { FAVOURITES, addDoc, collection, firestore, getAuth } from '../../firebase';
+import { FAVOURITES, addDoc, collection, firestore, getAuth, where, query, onSnapshot } from '../../firebase';
 
 export default function SeriesDescriptionScreen({route}) {
 
     const {item} = route.params;
     const [isAnonymous, setIsAnoymoys ] = useState(true);
-    
+    const [alreadyAdded, setAlreadyAdded] = useState(true);
+    const [favourites, setFavourites] = useState([])
+    const auth = getAuth()
 
     useEffect(() => {
-      const auth = getAuth()
+      
         if(auth.currentUser === null) {
           setIsAnoymoys(false)
         }
+    })
+
+    useEffect(() => {
+      const itemArray = [...item]
+      const q = query(collection(firestore,FAVOURITES), where('Title','==', itemArray[0].Title)) // query with route to movies in database
+      const queryAllMovies = onSnapshot(q,(querySnapshot) => { //function to query all movies
+      
+        const tempArray = []
+        querySnapshot.forEach((doc) => { // create objects of data
+          const moviesObject = {
+            uid : doc.data().uid,
+          }
+          tempArray.push(moviesObject) // push object into temporary array
+        })
+        setFavourites(tempArray)
+      })
+      return () => {
+      queryAllMovies() // run queryAllMovies function
+  
+      }
+    }, []);
+
+    useEffect( () => {
+      let found = favourites.findIndex(p => p.uid === auth.currentUser.uid)
+       if(found !== -1) {
+          setAlreadyAdded(false)
+       }
     })
 
     const handleFavoriteAdd= async(item) => {
@@ -69,12 +98,15 @@ export default function SeriesDescriptionScreen({route}) {
                   <Text style = {styles.descText}>{item.Genre}</Text>
 
                 {isAnonymous ? (<>
+                  {alreadyAdded ? (<>
                     <TouchableOpacity
                       style = {styles.listButtonStyle}
                       onPress={() => handleFavoriteAdd(item)}>
                     <Icon name='heart' style = {styles.icon}></Icon>
                     <Text style = {styles.descText}>Add to list</Text>
                     </TouchableOpacity>
+                    </>) : (<></>)}
+                    
                 </>) : (<></>)}      
                 </View>
 
