@@ -5,7 +5,6 @@ import { getAuth,onAuthStateChanged,signInWithEmailAndPassword } from '../fireba
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
 import IconTextbox from '../materialComponents/IconTextbox'
 import styles from '../styles/login'
-import Toast from 'react-native-toast-message';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('')
@@ -38,14 +37,6 @@ const LoginScreen = () => {
     navigation.navigate("forgotPassword")
   }
 
-  const showToast = () => {
-    Toast.show({
-      position: 'top',
-      text1: 'Login was succesful',
-      visibilityTime: 5000,
-    });
-  }
-
   return (
     <View
       style={styles.container}
@@ -66,8 +57,8 @@ const LoginScreen = () => {
       />
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={ () => {handleLogin(); showToast()}}
+      <TouchableOpacity
+          onPress={handleLogin}
           style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
