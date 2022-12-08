@@ -1,53 +1,43 @@
-import { useNavigation } from '@react-navigation/core'
-import React, { useState } from 'react'
-import { TouchableOpacity } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { getAuth, signOut} from '../firebase'
 import styles from '../styles/homescreen'
 import IconButtonsFooter from '../materialComponents/IconButtonFooter'
 import MovieScreen from './SubScreens/MovieScreen'
 import SeriesScreen from './SubScreens/SeriesScreen'
-import AccountSettingsScreen from './SubScreens/AccountSettingsScreen'
-import FavoriteScreen from './SubScreens/FavoriteScreen'
+import Profile from './SubScreens/Profile'
+import Recommendations from './SubScreens/Recommendations'
+import { getAuth } from 'firebase/auth'
 
 export default function HomeScreen() {
 
   const [screen, setScreen] = useState(1) // screen navigation
-  const navigation = useNavigation()
- 
+  const [isAnonymous, setIsAnoymoys ] = useState(true);
+  const auth = getAuth()
+
   
+
+  useEffect(() => {
+      if(auth.currentUser === null) {
+        setIsAnoymoys(false)
+      }
+  })
+ 
   const handleFooterPress = () => { // switch screens when footericon is pressed
     if(screen === 1) {
       return ( <MovieScreen/> )
     } else if(screen === 2) {
       return ( <SeriesScreen/> )
     } else if(screen === 3) {
-      return ( <FavoriteScreen/> )
+      return ( <Recommendations/> )
     } else if(screen === 4) { 
-      return (<AccountSettingsScreen/>)
-    } else if(screen === 5) {
-      handleSignOut()
-    }  
+      return (<Profile/>)
+    }
   }
   
-  //navigation
-  const handleSignOut = () => {
-    const auth = getAuth()
-      signOut(auth)
-      .then(() => {
-        navigation.replace("Login")
-      })
-      .catch(error => alert(error.message))
-  }
-
-
-
   return (
     <SafeAreaView style={styles.container}>   
         {handleFooterPress()}
-          <TouchableOpacity>
-        <IconButtonsFooter setScreen = {setScreen}/>
-      </TouchableOpacity>
+        <IconButtonsFooter setScreen = {setScreen} isAnonymous = {isAnonymous}/>
     </SafeAreaView>
   )
 }

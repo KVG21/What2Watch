@@ -86,7 +86,7 @@ export default function MovieScreen() {
 
   return (
    <>
-
+  <Text style={styles.title}>Movies</Text>
   <View style={styles.sortRectangle}>
     <TouchableOpacity onPress = { () => setToggleSortedByDd(!toggleSortedByDd)}>
         <View style={styles.wrapper}>
@@ -107,7 +107,6 @@ export default function MovieScreen() {
           ) }
     </TouchableOpacity>
   </View>
-
 
      <FlatList
           style={styles.imagesContainer}

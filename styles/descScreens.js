@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 export default StyleSheet.create({
     container: {
@@ -8,7 +8,7 @@ export default StyleSheet.create({
     title:{
         color:'white',
         fontSize:24,
-        marginTop: 20,
+        marginTop: 10,
         marginLeft: 15,
     },
     icon:{
@@ -40,26 +40,31 @@ export default StyleSheet.create({
         flexDirection:'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        marginTop: 14,
     },
     descDir: {
         color: 'white',
         fontSize: 16,
-        marginTop: 35,
+        marginTop: 10,
         marginLeft:10,
     },
     descStars:{
         color: 'white',
         fontSize:16,
-        marginTop:28,
+        marginTop:15,
         marginLeft:10,
     },
+    image:{
+        width:157,
+        height:203,
+        marginBottom:20,
+        marginLeft:5,
+        marginRight:5,
+      },
     descBox:{
-        width:350,
+        height: Dimensions.get('window').height * 0.25,
+        width: Dimensions.get('window').width,
         backgroundColor: "rgba(37,37,37,1)",
-        marginTop: 40,
-        marginHorizontal: 15,
-        paddingBottom:50,
+        marginTop: 5,
         paddingHorizontal:10,
     },
     textDesc: {
@@ -73,7 +78,36 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     webview: {
-        margin:15,
-        
-    }
+        margin:5,
+    },
+    listButtonStyle:{
+        flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+    },
+    recommendedImage: {
+        width:180,
+        height:250,
+    },
+    recommendedContainer: {
+        alignItems: 'center',
+    },
+    buttonText:{
+        color: 'white',
+    },
+    buttonContainer: {
+        flexDirection:'row',
+        justifyContent: 'space-around',
+    },
+    button: {
+        padding: 5,
+        width: 130,
+        height: 59,
+        backgroundColor: "rgba(94,53,177,1)",
+        borderRadius: 10,
+        borderWidth: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop:10,
+      },
 })

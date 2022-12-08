@@ -20,14 +20,14 @@ export default StyleSheet.create({
       fontSize: 16,
     },
     image:{
-      width:157,
-      height:203,
-      marginBottom:20,
+      width:180,
+      height:250,
+      marginBottom:10,
       marginLeft:5,
       marginRight:5,
     },
     sortRectangle:{
-      marginTop:20,
+      marginTop:10,
       backgroundColor: "#333333",
       borderWidth: 1,
       borderColor: "black",
@@ -53,6 +53,10 @@ export default StyleSheet.create({
       color:'white',
       fontSize: 16,
       margin:5,
-    }
+    },
+    title:{
+      color:'white',
+      fontSize: 22,
+    },
 
   })

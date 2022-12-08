@@ -1,15 +1,68 @@
-import {View, Text, TouchableOpacity, Alert} from 'react-native'
+import {View, Text,TouchableOpacity} from 'react-native'
+import { useState, useEffect } from 'react'
 import styles from '../../styles/descScreens'
 import Icon from "react-native-vector-icons/Ionicons";
 import WebView from 'react-native-webview'
-import { useState } from 'react';
+import { FAVOURITES, addDoc, collection, firestore, getAuth, where, query, onSnapshot } from '../../firebase';
 
 export default function SeriesDescriptionScreen({route}) {
+
     const {item} = route.params;
-    const [favoriteList, setFavoriteList] = useState([]) // favorite the series
-    const onFavorite = Series => {
-      setFavoriteList([...favoriteList, Series]);
-    };
+    const [isAnonymous, setIsAnoymoys ] = useState(true);
+    const [alreadyAdded, setAlreadyAdded] = useState(true);
+    const [favourites, setFavourites] = useState([])
+    const auth = getAuth()
+
+    useEffect(() => {
+      
+        if(auth.currentUser === null) {
+          setIsAnoymoys(false)
+        }
+    })
+
+    useEffect(() => {
+      const itemArray = [...item]
+      const q = query(collection(firestore,FAVOURITES), where('Title','==', itemArray[0].Title)) // query with route to movies in database
+      const queryAllMovies = onSnapshot(q,(querySnapshot) => { //function to query all movies
+      
+        const tempArray = []
+        querySnapshot.forEach((doc) => { // create objects of data
+          const moviesObject = {
+            uid : doc.data().uid,
+          }
+          tempArray.push(moviesObject) // push object into temporary array
+        })
+        setFavourites(tempArray)
+      })
+      return () => {
+      queryAllMovies() // run queryAllMovies function
+  
+      }
+    }, []);
+
+    useEffect( () => {
+      let found = favourites.findIndex(p => p.uid === auth.currentUser.uid)
+       if(found !== -1) {
+          setAlreadyAdded(false)
+       }
+    })
+
+    const handleFavoriteAdd= async(item) => {
+      const uid = getAuth()
+        const docRef = await addDoc(collection (firestore,FAVOURITES),{
+              uid: uid.currentUser.uid,
+              Photo: item.Photo,
+              Description : item.Description,
+              Episodes: item.Episodes,
+              Genre : item.Genre,
+              PgR : item.PgR,
+              Rating : item.Rating,
+              Stars : item.Stars,
+              Time : item.Time,
+              Title : item.Title,
+        }).catch(error => console.log(error))
+    }
+
     return (
       <>
       {item.map((item, key) => {
@@ -28,6 +81,9 @@ export default function SeriesDescriptionScreen({route}) {
                 </View>
 
                 <WebView 
+                allowsFullscreenVideo={true}
+                scrollEnabled={false}
+                bounces={false}
                 source={{uri: item.Trailer}}
                 style={styles.webview}/>
 
@@ -41,22 +97,24 @@ export default function SeriesDescriptionScreen({route}) {
                   <Icon name='albums' style = {styles.icon}></Icon>
                   <Text style = {styles.descText}>{item.Genre}</Text>
 
-                  <TouchableOpacity
-                    onPress={() => Alert.alert('added to favorites'
-                    [
-                      {text: 'ok', onPress: setFavoriteList}
-                    ])}>
-                  <Icon name='heart' style = {styles.icon}></Icon>
-                  <Text style = {styles.descText}>Add to list</Text>
-                  </TouchableOpacity>
-                
+                {isAnonymous ? (<>
+                  {alreadyAdded ? (<>
+                    <TouchableOpacity
+                      style = {styles.listButtonStyle}
+                      onPress={() => handleFavoriteAdd(item)}>
+                    <Icon name='heart' style = {styles.icon}></Icon>
+                    <Text style = {styles.descText}>Add to list</Text>
+                    </TouchableOpacity>
+                    </>) : (<></>)}
+                    
+                </>) : (<></>)}      
                 </View>
 
 
                 <Text style = {styles.descStars}>Stars : {item.Stars}</Text>
 
                 <View style = { styles.descBox}>
-                <Text style = {styles.textDesc}>Desc : {item.Description}</Text>
+                <Text style = {styles.textDesc}>{item.Description}</Text>
                 </View>
             </View>
           )

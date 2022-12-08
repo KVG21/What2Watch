@@ -1,52 +1,86 @@
 import React, { Component } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import { StyleSheet, View, TouchableOpacity, Dimensions, Text } from "react-native";
+import Icon from "react-native-vector-icons/Ionicons";
+import {getAuth, signOut} from '../firebase'
+import { useNavigation } from "@react-navigation/native";
 
-function IconButtonsFooter({style, setScreen}) {
+
+function IconButtonsFooter({style, setScreen, isAnonymous}) {
+
+  const navigation = useNavigation()
+  const handleSignOut = () => {
+    const auth = getAuth()
+      signOut(auth)
+      .then(() => {
+        navigation.replace("Login")
+      })
+      .catch(error => alert(error.message))
+  }
+
   return (
     <View style={[styles.container, style]}>
-      
-      <TouchableOpacity onPress = {() => setScreen(1) }>
-        <MaterialCommunityIconsIcon
-          name="video-vintage"
-          style={styles.icon}
-        ></MaterialCommunityIconsIcon>
-      </TouchableOpacity>
 
+      <View style = { styles.footerButton}>
+        <TouchableOpacity onPress = {() => setScreen(1) }>
+          <Icon
+            name="film-outline"
+            style={styles.icon}
+          ></Icon>
+          <Text style={styles.text}>Movies</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style = { styles.footerButton}>
         <TouchableOpacity onPress = {() => setScreen(2)}>
-            <MaterialCommunityIconsIcon
-            name="television"
+            <Icon
+            name="tv-outline"
             style={styles.icon}
-            ></MaterialCommunityIconsIcon>
+            ></Icon>
+          <Text style={styles.text}>Series</Text>
         </TouchableOpacity>
+      </View>
 
+      {isAnonymous ? (<>
+      <View style = { styles.footerButton}>
         <TouchableOpacity onPress =  {() => setScreen(3)}>
-            <MaterialCommunityIconsIcon
-            name="star-face"
+            <Icon
+            name="star"
             style={styles.icon}
-            ></MaterialCommunityIconsIcon>
+            ></Icon>
+            <Text style={styles.text}>For you</Text>
         </TouchableOpacity>
+      </View>  
 
+      <View style = { styles.footerButton}>
         <TouchableOpacity onPress = {() => setScreen(4)}>
-            <MaterialCommunityIconsIcon
-            name="account"
+            <Icon
+            name="person"
             style={styles.icon}
-            ></MaterialCommunityIconsIcon>
+            ></Icon>
+        <Text style={styles.text}>Profile</Text>            
         </TouchableOpacity>
-        
-      <TouchableOpacity onPress = {() => setScreen(5)}>
-        <MaterialCommunityIconsIcon
-          name="door"
-          style={styles.icon}
-        ></MaterialCommunityIconsIcon>
-      </TouchableOpacity>
+      </View>
+      </>) : (<>
+
+      <View style = { styles.footerButton}>
+        <TouchableOpacity onPress={() => handleSignOut()}>
+            <View style={styles.profileCont}>
+                <Icon
+                    name='log-out-outline'
+                    style={styles.icon}
+                ></Icon>
+                <Text style={styles.text}>Log out</Text>
+                </View>
+        </TouchableOpacity>
+      </View>
+     </>)} 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: 380,
+    width: Dimensions.get('window').width,
     height:60,
     backgroundColor: "rgba(94,53,177,1)",
     flexDirection: "row",
@@ -59,6 +93,15 @@ const styles = StyleSheet.create({
     fontSize: 32,
     opacity: 0.8,
   },
+  text:{
+    color:'white',
+    fontSize:10,
+  },
+  footerButton:{
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
 });
 
 export default IconButtonsFooter;
