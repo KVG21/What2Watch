@@ -42,6 +42,8 @@ const LoginScreen = () => {
       style={styles.container}
       behavior="padding"
     >
+      
+
       <UnderlineTextbox
         setEmail = { setEmail }
         email = { email }
