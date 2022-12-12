@@ -85,6 +85,7 @@ export default function HomeScreen() {
   }, [])
 
   useEffect(() => {
+    if (auth.currentUser !== null){
     const q = query(collection(firestore,FAVOURITES), where('uid','==', auth.currentUser.uid)) // query with route to favorites in database
     const gueryMyFav = onSnapshot(q,(querySnapshot) => { //function to query all favourites
       const tempArray = []
@@ -110,7 +111,7 @@ export default function HomeScreen() {
     return () => {
     gueryMyFav() // run gueryMyFav function
 
-    }
+    }}
   }, []);
 
   const toEmbed = (value) => {

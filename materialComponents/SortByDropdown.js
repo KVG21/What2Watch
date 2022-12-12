@@ -3,6 +3,7 @@ import { titleASC,titleDES,ratingDES,ratingASC,handleGenreSort } from '../utils/
 import { useState } from 'react';
 import styles from '../styles/homescreen'
 import Icon from "react-native-vector-icons/Ionicons";
+import SearchBar from './SearchBar';
 
 export default function SortByDropdown({value,setValue,backup}) {
 
@@ -42,6 +43,7 @@ export default function SortByDropdown({value,setValue,backup}) {
 
   return (<>
     <View style={styles.sortRectangle}>
+      <SearchBar value={value}setValue={setValue}backup={backup}/>
     <TouchableOpacity onPress = { () => setToggleSortedByDd(!toggleSortedByDd)}>
         <View style={styles.wrapper}>
           <Text style = {styles.sortTitle}>Sort by:</Text>
