@@ -37,22 +37,28 @@
       return sortedASC
   }
 
-  const sortToGenres = (list) => { //
-    let alphaASC = [...list];
-      alphaASC.sort((a,b)=>{
-        let x = a.Genre.toUpperCase(),
-        y = b.Genre.toUpperCase();
-        return x === y ? 0 : x > y ? 1 : -1;
-      })
-    return alphaASC
+  const handleGenreSort = (list, value) => {
+    let genreSort = [...list];
+    let tempArray = []
+    
+    for(let i = 0; i < genreSort.length; i++) {
+        const Genre = [] = genreSort[i].Genre   
+          if(Genre.includes(value)) {
+            tempArray.push(genreSort[i]);
+          }
+    }
+    
+    if(tempArray.length > 0) {
+      return tempArray
+    } else {
+      return genreSort
+    }
   }
-
-  
 
   export {
     titleASC,
     titleDES,
     ratingASC,
     ratingDES,
-    sortToGenres
+    handleGenreSort
   }

@@ -1,45 +1,15 @@
-import {  useRoute } from '@react-navigation/native';
-import { useEffect, useState } from 'react';
 import { TouchableOpacity, FlatList, Image, Text } from 'react-native'
 import styles from '../../styles/homescreen'
 import { useNavigation } from '@react-navigation/core'
-import Icon from "react-native-vector-icons/Ionicons";
 import Toast from 'react-native-toast-message';
+import { FAVOURITES, firestore, deleteDoc, doc } from '../../firebase';
 
-import { FAVOURITES, onSnapshot, query, collection, where, firestore, getAuth, deleteDoc, doc } from '../../firebase';
 
+export default function FavouriteScreen({route}) {
 
-export default function FavouriteScreen() {
-    const [favourite, setFavourite] = useState([]);
-    const auth = getAuth();
+    const {favourite} = route.params;
     const navigation =  useNavigation()
-    useEffect(() => {
-      const q = query(collection(firestore,FAVOURITES), where('uid','==', auth.currentUser.uid)) // query with route to movies in database
-      const queryAllMovies = onSnapshot(q,(querySnapshot) => { //function to query all movies
-        const tempArray = []
-        querySnapshot.forEach((doc) => { // create objects of data
-          const moviesObject = {
-            id: doc.id,
-            Photo: doc.data().Photo,
-            Description : doc.data().Description,
-            Director: doc.data().Director,
-            Genre : doc.data().Genre,
-            PgR : doc.data().PgR,
-            Rating : doc.data().Rating,
-            Stars : doc.data().Stars,
-            Time : doc.data().Time,
-            Title : doc.data().Title,
-            
-          }
-          tempArray.push(moviesObject) // push object into temporary array
-        })
-        setFavourite(tempArray) // push temporary array into movies array
-      })
-      return () => {
-      queryAllMovies() // run queryAllMovies function
-  
-      }
-    }, []);
+
 
     const handleDelete = (item) => {
       const docRef=doc (firestore, FAVOURITES, item.id)

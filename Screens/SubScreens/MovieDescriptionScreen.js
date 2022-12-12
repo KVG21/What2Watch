@@ -5,18 +5,6 @@ import Icon from "react-native-vector-icons/Ionicons";
 import WebView from "react-native-webview"
 import { FAVOURITES, addDoc, collection, firestore, getAuth, query,where, onSnapshot} from '../../firebase';
 
-
-import favorites from './FavoriteScreen';
-import { MOVIES } from '../../firebase';
-
-
-export const List = () => {
-   const [favoriteList, setFavoriteList] = useState([]) // favorite the movie
-    const onFavorite = Movie => {
-      setFavoriteList([...favoriteList, Movie]);
-    };
-}
-
 export default function MovieDescriptionScreen({route}) {
 
     const {item} = route.params;
@@ -60,7 +48,6 @@ export default function MovieDescriptionScreen({route}) {
     })
     
     const handleFavoriteAdd= async(item) => {
-
       const uid = getAuth()
         const docRef = await addDoc(collection (firestore,FAVOURITES),{
               uid: uid.currentUser.uid,
@@ -73,7 +60,6 @@ export default function MovieDescriptionScreen({route}) {
               Stars : item.Stars,
               Time : item.Time,
               Title : item.Title,
-
         }).catch(error => console.log(error))
     }
 

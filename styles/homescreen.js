@@ -31,7 +31,7 @@ export default StyleSheet.create({
       backgroundColor: "#333333",
       borderWidth: 1,
       borderColor: "black",
-      width:170,
+      width:280,
     },
     imagesContainer: {
       marginTop:30,
@@ -44,6 +44,11 @@ export default StyleSheet.create({
     sortTitle:{
       fontSize:22,
       color: "white",
+    },
+    sortContainer: {
+      height: 220,
+      flexWrap: 'wrap',
+      
     },
     wrapper: {
       flexDirection:'row',

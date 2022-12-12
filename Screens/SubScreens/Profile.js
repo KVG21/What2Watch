@@ -6,7 +6,7 @@ import styles from '../../styles/profile'
 import Icon from "react-native-vector-icons/Ionicons";
 
 
-export default function Profile() {
+export default function Profile({favourite}) {
 
     const auth = getAuth()
     const navigation = useNavigation()
@@ -16,7 +16,9 @@ export default function Profile() {
     }
 
     const favourites = () => {
-        navigation.navigate('FavouriteScreen')
+        navigation.navigate('FavouriteScreen', {
+            favourite : favourite
+          } )
     }
 
     const handleSignOut = () => {
