@@ -2,13 +2,14 @@ import { TouchableOpacity, Text, Image, View, FlatList }from 'react-native'
 import { useState } from 'react'
 import Icon from "react-native-vector-icons/Ionicons";
 import styles from '../../styles/descScreens'
+import { algorithm } from '../../utils/Algorithm';
 
 
-export default function Recommendations({movies, setMovies, series, setSeries, favourite, setFavourite}) {
+export default function Recommendations({movies, series, favourite}) {
 
     const [list, setList] = useState([]) //array for the random movie or serie
-   
 
+   
     const handleSurprise = (value) => { // handleSurprise, select movie or serie with random index
         const tempArray = [] // temporary array
         const index = Math.floor(Math.random()*100)  //random index between 0-99
@@ -20,8 +21,9 @@ export default function Recommendations({movies, setMovies, series, setSeries, f
             setList(tempArray) //set tempArray to List array
     }
 
-    const handlePickedForYou = () => {
-      setList(favourite)
+    const handlePickedForYou = () => { //this ought to be algorithm   
+     const tempArray = algorithm(favourite,series,movies) // send arrays for processing
+     setList(tempArray)
     }
 
   return (<>

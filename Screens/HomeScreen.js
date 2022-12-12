@@ -126,7 +126,7 @@ export default function HomeScreen() {
     } else if(screen === 2) {
       return ( <SeriesScreen series = {series} setSeries = {setSeries} backup = {backupForSeries} isAnonymous = {isAnonymous}/> )
     } else if(screen === 3) {
-      return ( <Recommendations movies = {movies} setMovies = {setMovies} series = {series} setSeries = {setSeries} favourite = {favourite}/> )
+      return ( <Recommendations movies = {movies} series = {series} favourite = {favourite}/> )
     } else if(screen === 4) { 
       return (<Profile favourite = {favourite}/>)
     }

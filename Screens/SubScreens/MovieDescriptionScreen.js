@@ -48,6 +48,7 @@ export default function MovieDescriptionScreen({route}) {
     })
     
     const handleFavoriteAdd= async(item) => {
+
       const uid = getAuth()
         const docRef = await addDoc(collection (firestore,FAVOURITES),{
               uid: uid.currentUser.uid,
@@ -60,6 +61,7 @@ export default function MovieDescriptionScreen({route}) {
               Stars : item.Stars,
               Time : item.Time,
               Title : item.Title,
+
         }).catch(error => console.log(error))
     }
 
