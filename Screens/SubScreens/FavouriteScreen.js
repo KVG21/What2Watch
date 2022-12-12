@@ -1,5 +1,5 @@
-import { TouchableOpacity, FlatList, Image, Text } from 'react-native'
-import styles from '../../styles/homescreen'
+import { TouchableOpacity, FlatList, Image, Text, View } from 'react-native'
+import styles from '../../styles/favourites'
 import { useNavigation } from '@react-navigation/core'
 import Toast from 'react-native-toast-message';
 import { FAVOURITES, firestore, deleteDoc, doc } from '../../firebase';
@@ -34,7 +34,8 @@ export default function FavouriteScreen({route}) {
         visibilityTime: 5000,
       });
     }
-    return(<>
+    return(
+    <View style={styles.container}>
      <FlatList
           style={styles.imagesContainer}
           keyExtractor={(item) => item.id}
@@ -42,10 +43,12 @@ export default function FavouriteScreen({route}) {
           numColumns={2}
           renderItem={({ item }) => ( 
             <>
-            <TouchableOpacity onPress={()=> handleImageClick(item)}>
+            <TouchableOpacity onPress={()=> handleImageClick(item)}
+              style = {styles.favoriteContainer}>
               <Image source={{ uri: item.Photo }}
               style={styles.image}
               resizeMode='contain'></Image>
+              <Text style = {styles.text}>{item.Title}</Text>
             </TouchableOpacity>
             <TouchableOpacity   style={styles.listButtonStyle}
                       onPress={() => {handleDelete(item); showToast()}} >
@@ -57,6 +60,7 @@ export default function FavouriteScreen({route}) {
             </>
             
           )}
-        /></>)
+        />
+        </View>)
 
 }
