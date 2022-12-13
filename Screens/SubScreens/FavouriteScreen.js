@@ -1,4 +1,4 @@
-import { TouchableOpacity, FlatList, Image, Text, View } from 'react-native'
+import { TouchableOpacity, FlatList, Image, Text, View, Alert } from 'react-native'
 import styles from '../../styles/favourites'
 import { useNavigation } from '@react-navigation/core'
 import Toast from 'react-native-toast-message';
@@ -42,22 +42,30 @@ export default function FavouriteScreen({route}) {
           data={favourite}
           numColumns={2}
           renderItem={({ item }) => ( 
-            <>
+            <View style={styles.itemContainer}>
             <TouchableOpacity onPress={()=> handleImageClick(item)}
               style = {styles.favoriteContainer}>
               <Image source={{ uri: item.Photo }}
               style={styles.image}
               resizeMode='contain'></Image>
-              <Text style = {styles.text}>{item.Title}</Text>
             </TouchableOpacity>
-            <TouchableOpacity   style={styles.listButtonStyle}
-                      onPress={() => {handleDelete(item); showToast()}} >
-                    
-                    
-                    <Text style = {styles.descText}>Delete from my list</Text>
+
+            <TouchableOpacity
+               style={styles.button}
+               onPress={() => Alert.alert(
+                'Alert',
+                'Remove item from favorites?',
+                [
+                  {text: 'Cancel', onPress: () => console.log('Canceled')},
+                  {text: 'Remove', onPress: () => handleDelete(item)},
+                ],
+                { cancelable: false }
+              )
+              }>
+                    <Text style = {styles.text}>Remove</Text>
             </TouchableOpacity>
             
-            </>
+            </View>
             
           )}
         />

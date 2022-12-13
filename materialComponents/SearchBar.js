@@ -1,5 +1,6 @@
-import { View, Text, TextInput } from 'react-native'
+import { View, Text, TextInput, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
+import Icon from "react-native-vector-icons/Ionicons";
 
 const SearchBar = ({value, setValue, backup}) => {
     const [text, setText] = useState('')
@@ -17,10 +18,30 @@ const SearchBar = ({value, setValue, backup}) => {
         setValue(searchArray)
     }
   return (
-    <View>
-      <TextInput placeholder='Searching...' onChangeText={text => setText(text)} onSubmitEditing={() => handleSearch()} placeholderTextColor='#fff'/>
+    <View style={styles.container}>
+      <TextInput style={styles.textInput} placeholder='Search' onChangeText={text => setText(text)} onSubmitEditing={() => handleSearch()} placeholderTextColor='#fff'/>
+      <Icon
+            name="search"
+            style={styles.icon}
+      ></Icon>
     </View>
   )
 }
+const styles = StyleSheet.create({
+  container:{
+    borderWidth:1,
+    borderRadius:5,
+    flexDirection:'row',
+    margin:5,
+  },
+  icon: {
+    color: "rgba(94,53,177,1)",
+    fontSize: 27,
+  },
+  textInput: {
+    fontSize:22,
+    color:'white',
+  }
+})
 
 export default SearchBar

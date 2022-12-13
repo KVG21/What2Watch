@@ -1,7 +1,6 @@
-import {View, Text, TouchableOpacity} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 import { titleASC,titleDES,ratingDES,ratingASC,handleGenreSort } from '../utils/SortByFunctions';
 import { useState } from 'react';
-import styles from '../styles/homescreen'
 import Icon from "react-native-vector-icons/Ionicons";
 import SearchBar from './SearchBar';
 
@@ -41,9 +40,10 @@ export default function SortByDropdown({value,setValue,backup}) {
         }
       }
 
-  return (<>
+  return (
+  <View style={styles.sortByDropdown}>
+    <SearchBar value={value}setValue={setValue}backup={backup}/>
     <View style={styles.sortRectangle}>
-      <SearchBar value={value}setValue={setValue}backup={backup}/>
     <TouchableOpacity onPress = { () => setToggleSortedByDd(!toggleSortedByDd)}>
         <View style={styles.wrapper}>
           <Text style = {styles.sortTitle}>Sort by:</Text>
@@ -79,5 +79,39 @@ export default function SortByDropdown({value,setValue,backup}) {
           ) }
     </TouchableOpacity>
   </View>
-  </>)
+  </View>)
 }
+const styles = StyleSheet.create({
+  sortRectangle:{
+    backgroundColor: "#333333",
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius:5,
+    margin: 5,
+  },
+  sortTitle:{
+    fontSize:22,
+    color: "white",
+  },
+  sortContainer: {
+    height: 220,
+    flexWrap: 'wrap',
+  },
+  sortByDropdown: {
+    flexDirection:'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  icon: {
+    color: "rgba(94,53,177,1)",
+    fontSize: 27,
+  },
+  wrapper: {
+    flexDirection:'row',
+    justifyContent: 'space-between',
+  },
+  sortText:{
+    color:'white',
+    fontSize: 16,
+  },
+})

@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  input: {
-    backgroundColor: 'white',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
-    marginTop: 5,
-  },
+    input: {
+      backgroundColor: 'white',
+      paddingHorizontal: 15,
+      paddingVertical: 10,
+      borderRadius: 10,
+      marginTop: 5,
+    },
     container: {
       flex: 1,
       justifyContent: 'center',
@@ -26,42 +26,12 @@ export default StyleSheet.create({
       marginLeft:5,
       marginRight:5,
     },
-    sortRectangle:{
-      marginTop:10,
-      backgroundColor: "#333333",
-      borderWidth: 1,
-      borderColor: "black",
-      width:280,
-    },
     imagesContainer: {
       marginTop:30,
       position:'relative'
-    },
-    icon: {
-      color: "rgba(94,53,177,1)",
-      fontSize: 27,
-    },
-    sortTitle:{
-      fontSize:22,
-      color: "white",
-    },
-    sortContainer: {
-      height: 220,
-      flexWrap: 'wrap',
-      
-    },
-    wrapper: {
-      flexDirection:'row',
-      justifyContent: 'space-between',
-    },
-    sortText:{
-      color:'white',
-      fontSize: 16,
-      margin:5,
     },
     title:{
       color:'white',
       fontSize: 22,
     },
-
   })

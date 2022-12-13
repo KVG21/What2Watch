@@ -21,8 +21,21 @@ export default StyleSheet.create({
         marginRight:5,
       },
     text:{
-        marginTop:10,
-        marginBottom:30,
         color:'white',
       },
+    itemContainer:{
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    button:{
+      width: 80,
+      height: 40,
+      backgroundColor: "rgba(94,53,177,1)",
+      borderRadius: 10,
+      borderWidth: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginVertical:5,
+    }
 })

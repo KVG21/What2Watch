@@ -32,7 +32,7 @@ export default function MovieScreen({movies, setMovies, backup, isAnonymous}) {
   return (
    <>
   <Text style={styles.title}>Movies</Text>
-    <SortByDropdown value = {movies} setValue = {setMovies} backup = {backup}/>
+    <SortByDropdown style={styles.dropdownlist} value = {movies} setValue = {setMovies} backup = {backup}/>
 
      <FlatList
           style={styles.imagesContainer}
