@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/core'
 import styles from '../../styles/homescreen'
 import SortByDropdown from '../../materialComponents/SortByDropdown'
 
-export default function SeriesScreen({series, setSeries, backup, isAnonymous}) {
+export default function SeriesScreen({series, displayForSeries, setDisplayForSeries, isAnonymous}) {
 
     const navigation = useNavigation()
 
@@ -18,12 +18,12 @@ export default function SeriesScreen({series, setSeries, backup, isAnonymous}) {
   return (
    <>
      <Text style={styles.title}>Series</Text>
-      <SortByDropdown value = {series} setValue = {setSeries} backup = {backup}/>
+      <SortByDropdown value = {series} setValue = {setDisplayForSeries}/>
 
      <FlatList
           style={styles.imagesContainer}
           keyExtractor={(item) => item.id}
-          data={series}
+          data={displayForSeries}
           numColumns={2}
           renderItem={({ item }) => ( 
             <>

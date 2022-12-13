@@ -2,11 +2,10 @@ import { View, Text, TextInput, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import Icon from "react-native-vector-icons/Ionicons";
 
-const SearchBar = ({value, setValue, backup}) => {
+const SearchBar = ({value, setValue}) => {
     const [text, setText] = useState('')
 
     const handleSearch = () => {
-        setValue(backup)
         const tempArray = [...value]
         const searchArray = []
         for (let item of tempArray){

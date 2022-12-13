@@ -36,6 +36,9 @@ const algorithm = (favourite,series,movies) => {
         if(Genre.includes(maxValue)) { //does the genre contain the maxValue? if found then it is added it to the finalArray
           finalArray.push(seriesArray[i])
         }
+        if( finalArray.length === 5) {
+          i = seriesArray.lengt
+        }
       }
 
       
@@ -44,6 +47,10 @@ const algorithm = (favourite,series,movies) => {
         const Genre = [] = movieArray[i].Genre
         if(Genre.includes(maxValue)) {
           finalArray.push(movieArray[i])
+        } 
+
+        if( finalArray.length === 10) {
+          i = movieArray.length
         }
       }
 
@@ -56,7 +63,6 @@ const algorithm = (favourite,series,movies) => {
             finalArray.splice(index, 1) //deletion
           }
       }
-
       return finalArray //return array
 }
 

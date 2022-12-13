@@ -1,24 +1,12 @@
-import { FlatList, Image, TouchableOpacity, Text} from 'react-native'
+import { FlatList, Image, TouchableOpacity, Text, SafeAreaView} from 'react-native'
 import { useNavigation } from '@react-navigation/core'
 import styles from '../../styles/homescreen'
 import SortByDropdown from '../../materialComponents/SortByDropdown'
-import { useEffect, useState } from 'react'
 
-export default function MovieScreen({movies, setMovies, backup, isAnonymous}) {
+export default function MovieScreen({movies, displayForMovies,setDisplayForMovies,isAnonymous}) {
 
     const navigation = useNavigation()
-    const [list, setList] = useState([])
 
-   /* useEffect (() => {
-      const getItems = () => {
-        const tempArray = []
-        tempArray.push(movies)
-      setList(tempArray)  
-      }
-      return () => {
-        getItems()
-      }
-    }, []) */
   
     const handleImageClick = (item) => {
         let tempArray = [item]
@@ -27,18 +15,18 @@ export default function MovieScreen({movies, setMovies, backup, isAnonymous}) {
           isAnonymous : isAnonymous
         } )
       }
-    
-  
+      
   return (
    <>
   <Text style={styles.title}>Movies</Text>
-    <SortByDropdown style={styles.dropdownlist} value = {movies} setValue = {setMovies} backup = {backup}/>
+    <SortByDropdown style={styles.dropdownlist} value = {movies} setValue = {setDisplayForMovies}/>
 
      <FlatList
           style={styles.imagesContainer}
           keyExtractor={(item) => item.id}
-          data={movies}
+          data={displayForMovies}
           numColumns={2}
+          maxToRenderPerBatch={10}
           renderItem={({ item }) => ( 
             <>
             <TouchableOpacity onPress = { () => handleImageClick(item) }>

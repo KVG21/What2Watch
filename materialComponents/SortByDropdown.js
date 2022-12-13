@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Icon from "react-native-vector-icons/Ionicons";
 import SearchBar from './SearchBar';
 
-export default function SortByDropdown({value,setValue,backup}) {
+export default function SortByDropdown({value,setValue}) {
 
     const [toggleSortedByDd, setToggleSortedByDd] = useState(false) // toggle between visible and hidden sorted by dropdownlist
     
@@ -32,9 +32,6 @@ export default function SortByDropdown({value,setValue,backup}) {
             tempArray = handleGenreSort(value, genre);
             setValue(tempArray)
             break;
-          case 6:
-            setValue(backup)
-            break;
           default:
             break;
         }
@@ -42,7 +39,7 @@ export default function SortByDropdown({value,setValue,backup}) {
 
   return (
   <View style={styles.sortByDropdown}>
-    <SearchBar value={value}setValue={setValue}backup={backup}/>
+    <SearchBar value={value}setValue={setValue}/>
     <View style={styles.sortRectangle}>
     <TouchableOpacity onPress = { () => setToggleSortedByDd(!toggleSortedByDd)}>
         <View style={styles.wrapper}>
@@ -71,7 +68,6 @@ export default function SortByDropdown({value,setValue,backup}) {
                   <Text style = {styles.sortText} onPress = { () => handleSortBy(5, 'Sci-Fi')}>Sci-Fi</Text>
                 <Text style = {styles.sortText} onPress = { () => handleSortBy(5, 'Romance')}>Romance</Text>
               <Text style = {styles.sortText} onPress = { () => handleSortBy(5, 'Animation')}>Animation</Text>
-            <Text style = {styles.sortText} onPress = { () => handleSortBy(6)}>See All</Text>
           </View></>) 
           : 
           (

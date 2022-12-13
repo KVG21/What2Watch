@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/core'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
-import { getAuth,onAuthStateChanged,signInWithEmailAndPassword } from '../firebase'
+import { signInAnonymously } from 'firebase/auth'
+import { getAuth,onAuthStateChanged,signInWithEmailAndPassword} from '../firebase'
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
 import IconTextbox from '../materialComponents/IconTextbox'
 import styles from '../styles/login'
@@ -26,7 +27,19 @@ const LoginScreen = () => {
   }
 
   const anonymosLogin = () =>   {
-    navigation.replace("Home")
+    const auth = getAuth();
+    signInAnonymously(auth)
+      .then(() => {
+        onAuthStateChanged(auth, (user) => {
+          if(user) {
+            navigation.replace("Home")
+          }
+        })
+        
+      })
+  .catch((error) => {
+    console.log(error)
+  });
   }
 
   const notUser = () => {

@@ -13,14 +13,15 @@ export default function MovieDescriptionScreen({route}) {
     const [favourites, setFavourites] = useState([])
     const auth = getAuth()
 
+    
     useEffect(() => {
-      
-        if(auth.currentUser === null) {
-          setIsAnoymoys(false)
-        }
+      if(auth.currentUser.isAnonymous === true) {
+        setIsAnoymoys(false)
+      }
     })
+      
 
-    useEffect(() => {
+    useEffect(() => { // fetch current item from favorites
       const itemArray = [...item]
       const q = query(collection(firestore,FAVOURITES), where('Title','==', itemArray[0].Title)) // query with route to movies in database
       const queryAllMovies = onSnapshot(q,(querySnapshot) => { //function to query all movies
@@ -40,17 +41,18 @@ export default function MovieDescriptionScreen({route}) {
       }
     }, []);
 
-    useEffect( () => {
-      let found = favourites.findIndex(p => p.uid === auth.currentUser.uid)
-       if(found !== -1) {
-          setAlreadyAdded(false)
-       }
+    useEffect( () => { // if signed user has already added movie to favorites then dont show add button
+      if(auth.currentUser !== null) {
+        let found = favourites.findIndex(p => p.uid === auth.currentUser.uid)
+          if(found !== -1) {
+              setAlreadyAdded(false)
+          }
+        }
     })
     
-    const handleFavoriteAdd= async(item) => {
-
-      const uid = getAuth()
-        const docRef = await addDoc(collection (firestore,FAVOURITES),{
+    const handleFavoriteAdd= async(item) => { // add item to favorites
+      const uid = getAuth() 
+        const docRef = await addDoc(collection (firestore,FAVOURITES),{ //route to favorites
               uid: uid.currentUser.uid,
               Photo: item.Photo,
               Description : item.Description,
@@ -61,7 +63,8 @@ export default function MovieDescriptionScreen({route}) {
               Stars : item.Stars,
               Time : item.Time,
               Title : item.Title,
-
+              Trailer : item.Trailer,
+              Episodes: null
         }).catch(error => console.log(error))
     }
 

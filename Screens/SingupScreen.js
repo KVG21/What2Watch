@@ -4,7 +4,6 @@ import { Text, TouchableOpacity, View } from 'react-native'
 import { getAuth,onAuthStateChanged,createUserWithEmailAndPassword } from '../firebase'
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
 import IconTextbox from '../materialComponents/IconTextbox'
-import LoginScreen from './LoginScreen'
 import styles from '../styles/signup'
 
 

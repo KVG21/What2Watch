@@ -13,12 +13,13 @@ export default function SeriesDescriptionScreen({route}) {
     const [favourites, setFavourites] = useState([])
     const auth = getAuth()
 
+    
     useEffect(() => {
-      
-        if(auth.currentUser === null) {
-          setIsAnoymoys(false)
-        }
+      if(auth.currentUser.isAnonymous === true) {
+        setIsAnoymoys(false)
+      }
     })
+      
 
     useEffect(() => {
       const itemArray = [...item]
@@ -41,10 +42,12 @@ export default function SeriesDescriptionScreen({route}) {
     }, []);
 
     useEffect( () => {
-      let found = favourites.findIndex(p => p.uid === auth.currentUser.uid)
-       if(found !== -1) {
-          setAlreadyAdded(false)
-       }
+      if(auth.currentUser !== null) {
+        let found = favourites.findIndex(p => p.uid === auth.currentUser.uid)
+          if(found !== -1) {
+              setAlreadyAdded(false)
+          }
+      }
     })
 
     const handleFavoriteAdd= async(item) => {
@@ -60,6 +63,7 @@ export default function SeriesDescriptionScreen({route}) {
               Stars : item.Stars,
               Time : item.Time,
               Title : item.Title,
+              Trailer : item.Trailer,
         }).catch(error => console.log(error))
     }
 

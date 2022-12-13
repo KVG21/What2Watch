@@ -15,17 +15,19 @@ export default function HomeScreen() {
   const [movies, setMovies] = useState([]) // array for movies
   const [series, setSeries] = useState([]) // array for series
   const [favourite, setFavourite] = useState([]) // array for favouriteList
-  const [backupForMovies, setBackupForMovies] = useState([]) // array for backupForMovies
-  const [backupForSeries, setBackupForSeries] = useState([]) // array for backupForSeries
+  const [displayForMovies, setDisplayForMovies] = useState([]) // array for DisplayForForMovies
+  const [displayForSeries, setDisplayForSeries] = useState([]) // array for DisplayForForSeries
   const [isAnonymous, setIsAnoymoys ] = useState(true);
   const auth = getAuth()
 
   
-  useEffect(() => {
-      if(auth.currentUser === null) {
+    useEffect(() => {
+      if(auth.currentUser.isAnonymous === true) {
         setIsAnoymoys(false)
       }
-  })
+    })
+      
+  
  
   useEffect(() => {
     const q = query(collection(firestore,MOVIES)) // query with route to movies in database
@@ -48,7 +50,7 @@ export default function HomeScreen() {
         tempArray.push(moviesObject) // push object into temporary array
       })
       setMovies(tempArray) // push temporary array into movies array
-      setBackupForMovies(tempArray) // set backup for movies
+      setDisplayForMovies(tempArray) // set DisplayFor for movies
     })
     return () => {
     queryAllMovies() // run queryAllMovies function
@@ -77,7 +79,7 @@ export default function HomeScreen() {
         tempArray.push(seriesObject) // push object into temporary array
       })
       setSeries(tempArray) // push temporary array into series array
-      setBackupForSeries(tempArray) // set backup for series
+      setDisplayForSeries(tempArray) // set DisplayFor for series
     })
     return () => {
       queryAllSeries() // run queryAllseries function
@@ -102,7 +104,7 @@ export default function HomeScreen() {
           Time : doc.data().Time,
           Title : doc.data().Title,
           Episodes : doc.data().Episodes,
-          
+          Trailer : toEmbed(doc.data().Trailer)
         }
         tempArray.push(favouritesObject) // push object into temporary array
       })
@@ -123,9 +125,9 @@ export default function HomeScreen() {
 
   const handleFooterPress = () => { // switch screens when footericon is pressed
     if(screen === 1) {
-      return ( <MovieScreen movies = {movies} setMovies = {setMovies} backup = {backupForMovies} isAnonymous = {isAnonymous}/> )
+      return ( <MovieScreen movies = {movies} setDisplayForMovies = {setDisplayForMovies} displayForMovies = {displayForMovies} isAnonymous = {isAnonymous}/> )
     } else if(screen === 2) {
-      return ( <SeriesScreen series = {series} setSeries = {setSeries} backup = {backupForSeries} isAnonymous = {isAnonymous}/> )
+      return ( <SeriesScreen series = {series} setDisplayForSeries = {setDisplayForSeries} displayForSeries = {displayForSeries} isAnonymous = {isAnonymous}/> )
     } else if(screen === 3) {
       return ( <Recommendations movies = {movies} series = {series} favourite = {favourite}/> )
     } else if(screen === 4) { 
