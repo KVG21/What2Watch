@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, Text, TextInput, StyleSheet, Dimensions } from 'react-native'
 import React, { useState } from 'react'
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -18,7 +18,7 @@ const SearchBar = ({value, setValue}) => {
     }
   return (
     <View style={styles.container}>
-      <TextInput style={styles.textInput} placeholder='Search' onChangeText={text => setText(text)} onSubmitEditing={() => handleSearch()} placeholderTextColor='#fff'/>
+      <TextInput style={styles.textInput} placeholder='Search by title..' onChangeText={text => setText(text)} onSubmitEditing={() => handleSearch()} placeholderTextColor='#737373'/>
       <Icon
             name="search"
             style={styles.icon}
@@ -32,6 +32,11 @@ const styles = StyleSheet.create({
     borderRadius:5,
     flexDirection:'row',
     margin:5,
+    width: Dimensions.get('window').width * 0.8,
+    height: Dimensions.get('window').height * 0.05,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#3d3d3d'
   },
   icon: {
     color: "rgba(94,53,177,1)",
@@ -40,6 +45,7 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize:22,
     color:'white',
+    width:'91%',
   }
 })
 

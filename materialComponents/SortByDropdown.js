@@ -1,10 +1,10 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet, Dimensions} from 'react-native'
 import { titleASC,titleDES,ratingDES,ratingASC,handleGenreSort } from '../utils/SortByFunctions';
 import { useState } from 'react';
 import Icon from "react-native-vector-icons/Ionicons";
 import SearchBar from './SearchBar';
 
-export default function SortByDropdown({value,setValue}) {
+export default function SortByDropdown({value,setValue, backup}) {
 
     const [toggleSortedByDd, setToggleSortedByDd] = useState(false) // toggle between visible and hidden sorted by dropdownlist
     
@@ -31,7 +31,7 @@ export default function SortByDropdown({value,setValue}) {
           case 5:
             tempArray = handleGenreSort(value, genre);
             setValue(tempArray)
-            break;
+            break; 
           default:
             break;
         }
@@ -53,7 +53,7 @@ export default function SortByDropdown({value,setValue}) {
               <Text style = {styles.sortText} onPress = { () => handleSortBy(3)}>Rating : High -{'>'} Low</Text>
             <Text style = {styles.sortText} onPress = { () => handleSortBy(4)}>Rating : Low -{'>'} High</Text>
 
-            <View style = {styles.sortContainer}>
+
               <Text style = {styles.sortText} onPress = { () => handleSortBy(5, 'Action')}>Action</Text>
                 <Text style = {styles.sortText} onPress = { () => handleSortBy(5, 'Drama')}>Drama</Text>
                   <Text style = {styles.sortText} onPress = { () => handleSortBy(5, 'Adventure')}>Adventure</Text>
@@ -68,13 +68,16 @@ export default function SortByDropdown({value,setValue}) {
                   <Text style = {styles.sortText} onPress = { () => handleSortBy(5, 'Sci-Fi')}>Sci-Fi</Text>
                 <Text style = {styles.sortText} onPress = { () => handleSortBy(5, 'Romance')}>Romance</Text>
               <Text style = {styles.sortText} onPress = { () => handleSortBy(5, 'Animation')}>Animation</Text>
-          </View></>) 
+          </>) 
           : 
           (
             <></>
           ) }
     </TouchableOpacity>
   </View>
+            <TouchableOpacity style = {styles.clear} onPress = { () => setValue(value)}>
+              <Text style = {styles.clearText}>Clear All Filters</Text>
+            </TouchableOpacity>
   </View>)
 }
 const styles = StyleSheet.create({
@@ -84,17 +87,15 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius:5,
     margin: 5,
+    width: Dimensions.get('window').width * 0.8,
+    justifyContent: "center"
   },
   sortTitle:{
     fontSize:22,
     color: "white",
   },
-  sortContainer: {
-    height: 220,
-    flexWrap: 'wrap',
-  },
   sortByDropdown: {
-    flexDirection:'row',
+    flexDirection:'column',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -108,6 +109,18 @@ const styles = StyleSheet.create({
   },
   sortText:{
     color:'white',
-    fontSize: 16,
+    fontSize: 20,
+    borderWidth: 1,
+    padding:2,
+  },
+  clear:{
+    width: Dimensions.get('window').width * 0.8,
+    borderWidth: 1,
+    borderRadius:5,
+    justifyContent:"center",
+  },
+  clearText:{
+    color:'white',
+    fontSize: 20,
   },
 })
