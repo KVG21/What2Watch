@@ -84,6 +84,7 @@ export default function SortByDropdown({value,setValue}) {
   </View>
             <TouchableOpacity style = {styles.clear} onPress = { () => handleClearAll()}>
               <Text style = {styles.clearText}>Clear All Filters</Text>
+              <Icon name='checkbox-outline' style={styles.icon}></Icon>
             </TouchableOpacity>
   </View>)
 }
@@ -95,20 +96,20 @@ const styles = StyleSheet.create({
     borderRadius:5,
     margin: 5,
     width: Dimensions.get('window').width * 0.8,
-    justifyContent: "center"
   },
   sortTitle:{
-    fontSize:22,
+    fontSize:18,
     color: "white",
+    padding:5,
   },
   sortByDropdown: {
     flexDirection:'column',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-between'
   },
   icon: {
     color: "rgba(94,53,177,1)",
-    fontSize: 27,
+    fontSize: 28,
   },
   wrapper: {
     flexDirection:'row',
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
   },
   sortText:{
     color:'white',
-    fontSize: 20,
+    fontSize: 18,
     borderWidth: 1,
     padding:2,
   },
@@ -124,10 +125,13 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width * 0.8,
     borderWidth: 1,
     borderRadius:5,
-    justifyContent:"center",
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   clearText:{
     color:'white',
-    fontSize: 20,
+    fontSize: 18,
+    padding:5,
   },
 })

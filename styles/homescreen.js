@@ -27,7 +27,7 @@ export default StyleSheet.create({
       marginRight:5,
     },
     imagesContainer: {
-      marginTop:30,
+      marginTop:15,
       position:'relative'
     },
     title:{

@@ -48,18 +48,18 @@ const styles = StyleSheet.create({
     margin:5,
     width: Dimensions.get('window').width * 0.8,
     height: Dimensions.get('window').height * 0.05,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#3d3d3d'
   },
   icon: {
     color: "rgba(94,53,177,1)",
-    fontSize: 27,
+    fontSize: 28,
   },
   textInput: {
-    fontSize:22,
+    fontSize:18,
     color:'white',
-    width:'91%',
+    padding:5,
   }
 })
 
