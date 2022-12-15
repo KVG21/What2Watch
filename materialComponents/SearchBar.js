@@ -5,20 +5,34 @@ import Icon from "react-native-vector-icons/Ionicons";
 const SearchBar = ({value, setValue}) => {
     const [text, setText] = useState('')
 
-    const handleSearch = () => {
-        const tempArray = [...value]
+    const handleSearch = () => { // search from the list
+        const tempArray = [...value] // copy value to array
         const searchArray = []
         for (let item of tempArray){
-            const Title = item.Title
-            if (Title.includes(text)){
-                searchArray.push(item)
+            const Title = item.Title.toLowerCase() //take title from item
+            const Genre = item.Genre.toLowerCase() //take genre from item
+            const Stars = item.Stars.toLowerCase() //take stars from item
+            let Director = '' //director is set to empty string becouse series dont have that property
+
+            if(item.hasOwnProperty('Director')){ //becouse series dont have director property in array we have to check for it, otherwise error will occure
+              Director = item.Director.toLowerCase()
             }
+            
+            if (Title.includes(text.toLowerCase())){ //if Title contains what was typed in the search then push that item to to searchArray
+                searchArray.push(item)
+            } else if (Genre.includes(text.toLowerCase())){ //if Genre contains what was typed in the search then push that
+              searchArray.push(item)
+            } else if (Stars.includes(text.toLowerCase())){ //if Stars contains what was typed in the search then push that
+              searchArray.push(item)
+            } else if (Director.includes(text.toLowerCase())){ //if Director contains what was typed in the search then push that
+              searchArray.push(item)
+            } 
         }
-        setValue(searchArray)
+        setValue(searchArray) //set the searchArray to value
     }
   return (
     <View style={styles.container}>
-      <TextInput style={styles.textInput} placeholder='Search by title..' onChangeText={text => setText(text)} onSubmitEditing={() => handleSearch()} placeholderTextColor='#737373'/>
+      <TextInput style={styles.textInput} placeholder='Search by title, genre, people' onChangeText={text => setText(text)} onSubmitEditing={() => handleSearch()} placeholderTextColor='#737373'/>
       <Icon
             name="search"
             style={styles.icon}

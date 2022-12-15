@@ -3,16 +3,15 @@ import { useNavigation } from '@react-navigation/core'
 import styles from '../../styles/homescreen'
 import SortByDropdown from '../../materialComponents/SortByDropdown'
 
-export default function MovieScreen({movies, displayForMovies,setDisplayForMovies,isAnonymous}) {
+export default function MovieScreen({movies, displayForMovies,setDisplayForMovies}) {
 
     const navigation = useNavigation()
 
   
-    const handleImageClick = (item) => {
+    const handleImageClick = (item) => { // handle image click
         let tempArray = [item]
-        navigation.navigate('MdesScreen', {
+        navigation.navigate('MdesScreen', { // navigate to movieDescriptionScreen with item selected
           item : tempArray,
-          isAnonymous : isAnonymous
         } )
       }
       

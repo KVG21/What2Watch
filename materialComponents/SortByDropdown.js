@@ -4,31 +4,33 @@ import { useState } from 'react';
 import Icon from "react-native-vector-icons/Ionicons";
 import SearchBar from './SearchBar';
 
-export default function SortByDropdown({value,setValue, backup}) {
+export default function SortByDropdown({value,setValue}) {
 
     const [toggleSortedByDd, setToggleSortedByDd] = useState(false) // toggle between visible and hidden sorted by dropdownlist
+    const [text, setText] = useState('') // text to show what you are sorting by
     
-    const handleSortBy = (choice, genre) => {
-        setToggleSortedByDd(!toggleSortedByDd)
+    const handleSortBy = (choice, genre) => {  // handle function for sorting
+        setText(genre)
+        setToggleSortedByDd(!toggleSortedByDd) // toggle dropdown away
         let tempArray
         switch (choice) {
-          case 1:
+          case 1: // case 1 is by titles in the ascending order
             tempArray = titleASC(value);
               setValue(tempArray)
               break; 
-          case 2:
+          case 2: // case 2 is by titles in the descending order
             tempArray = titleDES(value);
               setValue(tempArray)
               break;
-          case 3:
+          case 3:  // case 3 is by rating in the descending order
             tempArray = ratingDES(value);
               setValue(tempArray)
               break;
-          case 4:
+          case 4: // case 4 is by rating in the ascending order
             tempArray = ratingASC(value);
               setValue(tempArray)
               break;
-          case 5:
+          case 5: // case 5 finds those who have genre that was selected
             tempArray = handleGenreSort(value, genre);
             setValue(tempArray)
             break; 
@@ -37,13 +39,18 @@ export default function SortByDropdown({value,setValue, backup}) {
         }
       }
 
+    const handleClearAll = () => { // handle clear all
+      setText('') // set sortby text to empty string
+      setValue(value) // setValue to its original value
+    }
+
   return (
   <View style={styles.sortByDropdown}>
     <SearchBar value={value}setValue={setValue}/>
     <View style={styles.sortRectangle}>
     <TouchableOpacity onPress = { () => setToggleSortedByDd(!toggleSortedByDd)}>
         <View style={styles.wrapper}>
-          <Text style = {styles.sortTitle}>Sort by:</Text>
+          <Text style = {styles.sortTitle}>Sort by: {text}</Text>
           <Icon name='list-circle-outline' style = {styles.icon}></Icon>
         </View>
           { toggleSortedByDd ? (
@@ -75,7 +82,7 @@ export default function SortByDropdown({value,setValue, backup}) {
           ) }
     </TouchableOpacity>
   </View>
-            <TouchableOpacity style = {styles.clear} onPress = { () => setValue(value)}>
+            <TouchableOpacity style = {styles.clear} onPress = { () => handleClearAll()}>
               <Text style = {styles.clearText}>Clear All Filters</Text>
             </TouchableOpacity>
   </View>)

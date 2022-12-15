@@ -29,7 +29,7 @@ export default function FavouriteScreen() {
             Time : doc.data().Time,
             Title : doc.data().Title,
             Episodes : doc.data().Episodes,
-            Trailer : toEmbed(doc.data().Trailer)
+            Trailer : doc.data().Trailer
           }
           tempArray.push(favouritesObject) // push object into temporary array
         })
@@ -41,23 +41,19 @@ export default function FavouriteScreen() {
       }
     }, []);
 
-    const handleDelete = (item) => {
-      let index = favourite.findIndex(p => p.id === item.id)
-      if(index !== -1) { 
+    const handleDelete = (item) => { // delete item from favourites, also deletes from firebase
         const docRef=doc (firestore, FAVOURITES, item.id)
         deleteDoc(docRef) .then(()=> {
-          console.log('elokuva poistettu')
-        }).catch(error => console.log(error))
-      }
+        }).catch()
     }
 
-    const handleImageClick = (item) => {
+    const handleImageClick = (item) => { // handle image clicks
       let tempArray = [item]
-      if(item.Episodes === null) {
+      if(item.Episodes === null) { // if item has no episodes then navigate to moviesDescriptionScreen
       navigation.navigate('MdesScreen', {
         item : tempArray
       } )
-    }else {
+    }else { // if item has episodes then navigate to seriesDescriptionScreen
       navigation.navigate('SdesScreen', {
         item : tempArray
       } )
@@ -71,12 +67,7 @@ export default function FavouriteScreen() {
         visibilityTime: 5000,
       });
     }
-    const toEmbed = (value) => {
-      const url = value
-      const eurl = url.split('watch?v=')
-      const embed = eurl.join('embed/')
-      return embed
-    }
+
     return(
     <View style={styles.container}>
      <FlatList
@@ -99,7 +90,7 @@ export default function FavouriteScreen() {
                 'Alert',
                 'Remove item from favorites?',
                 [
-                  {text: 'Cancel', onPress: () => console.log('Canceled')},
+                  {text: 'Cancel'},
                   {text: 'Remove', onPress: () => handleDelete(item)},
                 ],
                 { cancelable: false }

@@ -9,19 +9,19 @@ import Icon from "react-native-vector-icons/Ionicons";
 export default function AccountSettingsScreen() {
 
   const navigation = useNavigation();
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('') //email parameter
   const auth = getAuth()
-  let creationTime = auth.currentUser.metadata.creationTime
+  let creationTime = auth.currentUser.metadata.creationTime // users account creation time
 
 
-  const updatePassword = () => {
+  const updatePassword = () => { // update pasword 
     sendPasswordResetEmail(getAuth(), email)
     .then(() => {
       alert("Password reset email sent")
     }).catch(error => alert(error.message))
   }
 
-  const handleDeleteUser = () => {
+  const handleDeleteUser = () => { // delete user
     const user = auth.currentUser
       deleteUser(user).then(() => {
         navigation.replace("Signup")

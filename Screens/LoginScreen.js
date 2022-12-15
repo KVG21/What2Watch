@@ -13,20 +13,20 @@ const LoginScreen = () => {
   const navigation = useNavigation()
 
 
-  const handleLogin = () => {
+  const handleLogin = () => { // handle login
     const auth = getAuth()
-      signInWithEmailAndPassword(auth,email, password)
+      signInWithEmailAndPassword(auth,email, password) // send email and password and auth to firebase
       .then( () => {
-        onAuthStateChanged(auth, (user) => {
-          if (user) {
-            navigation.replace("Home")
+        onAuthStateChanged(auth, (user) => { // if auth comes back with different state we continue
+          if (user) { // if user found 
+            navigation.replace("Home") //navigate to homescreen
           }
         })
       })
       .catch(error => alert(error.message))
   }
 
-  const anonymosLogin = () =>   {
+  const anonymosLogin = () =>   { // anonymously login
     const auth = getAuth();
     signInAnonymously(auth)
       .then(() => {
@@ -37,16 +37,14 @@ const LoginScreen = () => {
         })
         
       })
-  .catch((error) => {
-    console.log(error)
-  });
+  .catch();
   }
 
-  const notUser = () => {
+  const notUser = () => { // navigate to regiseration screen
     navigation.navigate("Signup")
   }
 
-  const forgotPassword = () => {
+  const forgotPassword = () => { // navigate to forgotPassword screen
     navigation.navigate("forgotPassword")
   }
 

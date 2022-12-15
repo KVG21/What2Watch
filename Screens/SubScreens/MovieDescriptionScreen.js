@@ -8,13 +8,13 @@ import { FAVOURITES, addDoc, collection, firestore, getAuth, query,where, onSnap
 export default function MovieDescriptionScreen({route}) {
 
     const {item} = route.params;
-    const [isAnonymous, setIsAnoymoys ] = useState(true);
-    const [alreadyAdded, setAlreadyAdded] = useState(true);
+    const [isAnonymous, setIsAnoymoys ] = useState(true); // isAnonymous ?
+    const [alreadyAdded, setAlreadyAdded] = useState(true); // has already been added to favourites?
     const [favourites, setFavourites] = useState([])
     const auth = getAuth()
 
     
-    useEffect(() => {
+    useEffect(() => { // check if user is anonymously logged in
       if(auth.currentUser.isAnonymous === true) {
         setIsAnoymoys(false)
       }
@@ -65,7 +65,7 @@ export default function MovieDescriptionScreen({route}) {
               Title : item.Title,
               Trailer : item.Trailer,
               Episodes: null
-        }).catch(error => console.log(error))
+        }).catch()
     }
 
     
@@ -82,41 +82,37 @@ export default function MovieDescriptionScreen({route}) {
                 </View>
 
                 <WebView 
-                allowsFullscreenVideo={true}
-                scrollEnabled={false}
-                bounces={false}
-                source={{uri: item.Trailer}}
-                style={styles.webview}/>
+                  allowsFullscreenVideo={true}
+                  scrollEnabled={false}
+                  bounces={false}
+                  source={{uri: item.Trailer}}
+                  style={styles.webview}/>
 
                 <View style = {styles.iconRow}>
                   <Icon name='eye' style = {styles.icon}></Icon>
-                  <Text style = {styles.descText}>{item.PgR}</Text>
-
-                  <Icon name='star' style={styles.icon}></Icon>
-                  <Text style = {styles.descText}>{item.Rating}</Text>
-
+                    <Text style = {styles.descText}>{item.PgR}</Text>
+                      <Icon name='star' style={styles.icon}></Icon>
+                    <Text style = {styles.descText}>{item.Rating}</Text>
                   <Icon name='albums' style = {styles.icon}></Icon>
-                  <Text style = {styles.descText}>{item.Genre}</Text>
+                <Text style = {styles.descText}>{item.Genre}</Text>
 
                 {isAnonymous ? (<>
-                  { alreadyAdded ? (<>
+                  {alreadyAdded ? (<>
                     <TouchableOpacity
                       style={styles.listButtonStyle}
-                      onPress={() => handleFavoriteAdd(item)}>
-                    
-                    <Icon name='heart' style = {styles.icon}></Icon>
-                    <Text style = {styles.descText}>Add to my list</Text>
-                  </TouchableOpacity>
-                  </>) : (<></>) }
-                 
+                      onPress={() => handleFavoriteAdd(item)}
+                      >
+                        <Icon name='heart' style = {styles.icon}></Icon>
+                      <Text style = {styles.descText}>Add to my list</Text>
+                    </TouchableOpacity>
+                  </>) : (<></>) }  
                 </>) : (<></>)}   
                 </View>
 
                 <Text style = {styles.descDir}>Director : {item.Director}</Text>
-                <Text style = {styles.descStars}>Stars : {item.Stars}</Text>
-
-                <View style = { styles.descBox}>
-                <Text style = {styles.textDesc}>{item.Description}</Text>
+                  <Text style = {styles.descStars}>Stars : {item.Stars}</Text>
+                    <View style = { styles.descBox}>
+                  <Text style = {styles.textDesc}>{item.Description}</Text>
                 </View>
             </View>
         )

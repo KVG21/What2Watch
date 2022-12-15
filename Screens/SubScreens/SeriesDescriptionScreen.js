@@ -23,25 +23,25 @@ export default function SeriesDescriptionScreen({route}) {
 
     useEffect(() => {
       const itemArray = [...item]
-      const q = query(collection(firestore,FAVOURITES), where('Title','==', itemArray[0].Title)) // query with route to movies in database
-      const queryAllMovies = onSnapshot(q,(querySnapshot) => { //function to query all movies
+      const q = query(collection(firestore,FAVOURITES), where('Title','==', itemArray[0].Title)) // query with route to favourites in database
+      const queryAllfavourites = onSnapshot(q,(querySnapshot) => { //function to query all favourites
       
         const tempArray = []
         querySnapshot.forEach((doc) => { // create objects of data
-          const moviesObject = {
+          const favouritesObject = {
             uid : doc.data().uid,
           }
-          tempArray.push(moviesObject) // push object into temporary array
+          tempArray.push(favouritesObject) // push object into temporary array
         })
         setFavourites(tempArray)
       })
       return () => {
-      queryAllMovies() // run queryAllMovies function
+      queryAllfavourites() // run queryAllfavourites function
   
       }
     }, []);
 
-    useEffect( () => {
+    useEffect( () => { // is user is found check if user has already added item to favorites
       if(auth.currentUser !== null) {
         let found = favourites.findIndex(p => p.uid === auth.currentUser.uid)
           if(found !== -1) {
@@ -50,9 +50,9 @@ export default function SeriesDescriptionScreen({route}) {
       }
     })
 
-    const handleFavoriteAdd= async(item) => {
+    const handleFavoriteAdd= async(item) => { // add to favorites
       const uid = getAuth()
-        const docRef = await addDoc(collection (firestore,FAVOURITES),{
+        const docRef = await addDoc(collection (firestore,FAVOURITES),{ // route to favorite
               uid: uid.currentUser.uid,
               Photo: item.Photo,
               Description : item.Description,

@@ -11,23 +11,23 @@ export default function Profile({favourite}) {
     const auth = getAuth()
     const navigation = useNavigation()
 
-    const accountSettings = () => {
+    const accountSettings = () => { //navigate to account settings screen
         navigation.navigate('AccountSettingsScreen')
     }
 
-    const favourites = () => {
+    const favourites = () => { //navigate to favourites screen
         navigation.navigate('FavouriteScreen', {
             favourite : favourite
           } )
     }
 
-    const handleSignOut = () => {
+    const handleSignOut = () => { //sign userOut
         const auth = getAuth()
           signOut(auth)
           .then(() => {
-            navigation.replace("Login")
+            navigation.replace("Login") //navigate to login screen
           })
-          .catch(error => alert(error.message))
+          .catch()
       }
     
   return (

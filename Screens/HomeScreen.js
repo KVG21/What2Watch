@@ -104,7 +104,7 @@ export default function HomeScreen() {
           Time : doc.data().Time,
           Title : doc.data().Title,
           Episodes : doc.data().Episodes,
-          Trailer : toEmbed(doc.data().Trailer)
+          Trailer : doc.data().Trailer
         }
         tempArray.push(favouritesObject) // push object into temporary array
       })
@@ -116,15 +116,15 @@ export default function HomeScreen() {
     }}
   }, []);
 
-  const toEmbed = (value) => {
+  const toEmbed = (value) => { // take the trailer and covert it into a embedded
     const url = value
-    const eurl = url.split('watch?v=')
+    const eurl = url.split('watch?v=') // replace 'watch)v=' with 'embed/'
     const embed = eurl.join('embed/')
     return embed
   }
 
-  const handleFooterPress = () => { // switch screens when footericon is pressed
-    if(screen === 1) {
+  const handleFooterPress = () => { // switch screens when something is pressed in IconButtonsFooter
+    if(screen === 1) { 
       return ( <MovieScreen movies = {movies} setDisplayForMovies = {setDisplayForMovies} displayForMovies = {displayForMovies} isAnonymous = {isAnonymous}/> )
     } else if(screen === 2) {
       return ( <SeriesScreen series = {series} setDisplayForSeries = {setDisplayForSeries} displayForSeries = {displayForSeries} isAnonymous = {isAnonymous}/> )

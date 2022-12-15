@@ -3,15 +3,14 @@ import { useNavigation } from '@react-navigation/core'
 import styles from '../../styles/homescreen'
 import SortByDropdown from '../../materialComponents/SortByDropdown'
 
-export default function SeriesScreen({series, displayForSeries, setDisplayForSeries, isAnonymous}) {
+export default function SeriesScreen({series, displayForSeries, setDisplayForSeries}) {
 
     const navigation = useNavigation()
 
-      const handleImageClick = (item) => {
+      const handleImageClick = (item) => { // handle image click
         let tempArray = [item]
-        navigation.navigate('SdesScreen', {
+        navigation.navigate('SdesScreen', { // navigate to seriesDescriptionScreen with item selected
           item : tempArray,
-          isAnonymous : isAnonymous
         } )
       }
 

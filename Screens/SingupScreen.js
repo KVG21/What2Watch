@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/core'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { getAuth,onAuthStateChanged,createUserWithEmailAndPassword } from '../firebase'
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'

@@ -1,6 +1,6 @@
-import { View, Text, TouchableOpacity, TextInput, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity} from 'react-native'
 import { useNavigation } from '@react-navigation/core'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import UnderlineTextbox from '../materialComponents/UnderlineTextbox'
 import styles from '../styles/login'
 import {getAuth, sendPasswordResetEmail} from '../firebase'
@@ -9,17 +9,16 @@ import {getAuth, sendPasswordResetEmail} from '../firebase'
 const ForgotPasswordScreen = () => {
 
     const navigation = useNavigation();
-    const [email, setEmail] = useState('')
-    const auth = getAuth()
+    const [email, setEmail] = useState('') // email parameter
 
-    const updatePassword = () => {
+    const updatePassword = () => { // update password via sending user an email
         sendPasswordResetEmail(getAuth(), email)
         .then(() => {
           alert("Password reset email sent")
-        }).catch(error => alert(error.message))
+        }).catch() 
       }
 
-    const backLogin = () => {
+    const backLogin = () => { // navigate back to login
         navigation.navigate("Login")
     }
 
@@ -36,6 +35,11 @@ const ForgotPasswordScreen = () => {
           style={styles.button}>
           <Text style={styles.buttonText}>Reset via email</Text>
         </TouchableOpacity>
+          <TouchableOpacity
+            onPress={backLogin}
+            style={styles.button}>
+            <Text style={styles.buttonText}>Go back</Text>
+          </TouchableOpacity>
         </View>
   )
 }
